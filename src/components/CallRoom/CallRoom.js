@@ -19,6 +19,7 @@ const CallRoom = ({ className }) => {
     roomDOM: '#chatRoom',
     roomName: 'cris-test'
   });
+
   useEffect(() => {
     startRoom();
   }, []);

@@ -1,29 +1,28 @@
+/* eslint-disable no-undef */
 import { useState } from 'react';
 
 const interfaceConfig = {
-  DEFAULT_BACKGROUND: 'teal',
+  DEFAULT_BACKGROUND: 'grey',
   DISABLE_VIDEO_BACKGROUND: false,
   INITIAL_TOOLBAR_TIMEOUT: 20000,
   TOOLBAR_TIMEOUT: 4000,
   TOOLBAR_ALWAYS_VISIBLE: false,
-  DEFAULT_REMOTE_DISPLAY_NAME: 'USER',
-  DEFAULT_LOCAL_DISPLAY_NAME: 'SUPER',
+  DEFAULT_REMOTE_DISPLAY_NAME: 'REMOTE',
+  DEFAULT_LOCAL_DISPLAY_NAME: 'LOCAL',
   SHOW_JITSI_WATERMARK: false,
-  JITSI_WATERMARK_LINK: 'https://jitsi.org',
   SHOW_WATERMARK_FOR_GUESTS: false,
-  SHOW_BRAND_WATERMARK: true,
-  BRAND_WATERMARK_LINK:
-    'https://i.pinimg.com/originals/ef/1e/1e/ef1e1e7787a813d943d3bf48262c97d8.jpg',
+  SHOW_BRAND_WATERMARK: false,
+  BRAND_WATERMARK_LINK: '',
   SHOW_POWERED_BY: false,
   SHOW_DEEP_LINKING_IMAGE: false,
   GENERATE_ROOMNAMES_ON_WELCOME_PAGE: true,
-  DISPLAY_WELCOME_PAGE_CONTENT: true,
+  DISPLAY_WELCOME_PAGE_CONTENT: false,
   DISPLAY_WELCOME_PAGE_TOOLBAR_ADDITIONAL_CONTENT: false,
-  APP_NAME: 'Jitsi Meet',
-  NATIVE_APP_NAME: 'Jitsi Meet',
-  PROVIDER_NAME: 'Jitsi',
+  APP_NAME: 'Ancert VideoChat',
+  NATIVE_APP_NAME: 'Ancert VideoChat',
+  PROVIDER_NAME: 'Ancert',
   LANG_DETECTION: true,
-  INVITATION_POWERED_BY: true,
+  INVITATION_POWERED_BY: false,
   AUTHENTICATION_ENABLE: true,
   TOOLBAR_BUTTONS: [],
   SETTINGS_SECTIONS: [],
@@ -46,9 +45,9 @@ const interfaceConfig = {
   LOCAL_THUMBNAIL_RATIO: 16 / 9,
   REMOTE_THUMBNAIL_RATIO: 1,
   LIVE_STREAMING_HELP_LINK: 'https://jitsi.org/live',
-  MOBILE_APP_PROMO: true,
+  MOBILE_APP_PROMO: false,
   MAXIMUM_ZOOMING_COEFFICIENT: 1.3,
-  SUPPORT_URL: 'https://community.jitsi.org/',
+  SUPPORT_URL: 'https://notariado.org/',
   CONNECTION_INDICATOR_AUTO_HIDE_ENABLED: true,
   CONNECTION_INDICATOR_AUTO_HIDE_TIMEOUT: 5000,
   CONNECTION_INDICATOR_DISABLED: false,
@@ -63,7 +62,7 @@ const interfaceConfig = {
 };
 
 function useConference({
-  roomName = 'AncertTest',
+  roomName = 'Custom Room',
   roomDOM = '#root',
   customDomain = 'meet.jit.si',
   adminEmail = ''
@@ -87,23 +86,15 @@ function useConference({
     );
   };
 
-  const roomNameChange = newName => {
-    api.executeCommand('subject', newName);
-  };
-
   const toggleAudio = () => {
     api.executeCommand('toggleAudio');
     api.isAudioMuted().then(muted => {
-      console.log('[audio]', muted);
       setIsAudioEnabled(!muted);
     });
   };
   const toggleVideo = () => {
     api.executeCommand('toggleVideo');
-    api.isVideoMuted().then(muted => {
-      console.log('[video]', muted);
-      setIsVideoEnabled(!muted);
-    });
+    setIsVideoEnabled(!isVideoEnabled);
   };
 
   const toggleChat = () => {
@@ -116,10 +107,6 @@ function useConference({
     setIsScreenShareEnabled(!isScreenShareEnabled);
   };
 
-  const toggleTileView = () => {
-    api.executeCommand('toggleTileView');
-  };
-
   const hangup = () => {
     api.executeCommand('hangup');
   };
@@ -130,12 +117,10 @@ function useConference({
     isChatEnabled,
     isScreenShareEnabled,
     startRoom,
-    roomNameChange,
     toggleAudio,
     toggleVideo,
     toggleChat,
     toggleShareScreen,
-    toggleTileView,
     hangup
   };
 }
