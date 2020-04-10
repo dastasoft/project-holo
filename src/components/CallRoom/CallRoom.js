@@ -8,7 +8,7 @@ const chatRoomConfig = {
   width: 1280,
   height: 720,
   border: 5,
-  roomName: 'Test Room Name'
+  roomName: 'Ancert'
 };
 
 const CallRoom = ({ className }) => {
@@ -17,12 +17,10 @@ const CallRoom = ({ className }) => {
     isAudioEnabled,
     isChatEnabled,
     startRoom,
-    roomNameChange,
     toggleAudio,
     toggleVideo,
     toggleChat,
     toggleShareScreen,
-    toggleTileView,
     hangup
   } = useConference({
     roomDOM: '#chatRoom',
@@ -30,15 +28,10 @@ const CallRoom = ({ className }) => {
     width: chatRoomConfig.width,
     height: chatRoomConfig.height
   });
-  const [roomName, setRoomName] = useState(chatRoomConfig.roomName);
 
   useEffect(() => {
     startRoom();
   }, []);
-
-  const onRoomNameHandler = event => {
-    setRoomName(event.target.value);
-  };
 
   return (
     <div className={className}>
