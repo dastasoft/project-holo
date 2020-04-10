@@ -11,7 +11,7 @@ const chatRoomConfig = {
   roomName: 'Test Room Name'
 };
 
-const CallRoom = () => {
+const CallRoom = ({ className }) => {
   const {
     isVideoEnabled,
     isAudioEnabled,
@@ -41,18 +41,7 @@ const CallRoom = () => {
   };
 
   return (
-    <>
-      <div style={{ display: 'flex', alignItems: 'stretch', padding: '8px' }}>
-        <input
-          style={{ marginRight: '8px' }}
-          type="text"
-          value={roomName}
-          onChange={onRoomNameHandler}
-        />
-        <Button type="button" onClick={() => roomNameChange(roomName)}>
-          <i className="fa fa-edit" />
-        </Button>
-      </div>
+    <div className={className}>
       <ChatRoom id="chatRoom" {...chatRoomConfig} />
       <Buttons>
         <Button type="button" onClick={toggleShareScreen}>
@@ -71,16 +60,12 @@ const CallRoom = () => {
           <i className="fa fa-door-open" />
         </Button>
       </Buttons>
-    </>
+    </div>
   );
 };
 
 const ChatRoom = styled.div`
-  width: ${props => props.width + props.border * 2}px;
-  height: ${props => props.height + props.border * 2}px;
   margin: 0 auto;
-  border: ${props => props.border}px solid RoyalBlue;
-  border-radius: ${props => props.border}px;
 `;
 
 const Buttons = styled.div`
@@ -101,16 +86,17 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: teal;
+  width: 48px;
+  height: 48px;
+  background-color: rgba(0, 0, 0, 0.5);
   border: none;
   color: white;
-  padding: 13px 18px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 20%;
 
-  &:hover {
-    background-color: RoyalBlue;
+  &.active {
+    transition: background-color red;
   }
 `;
 

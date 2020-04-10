@@ -1,15 +1,15 @@
-@import '../../scss/abstracts';
-
 .rounded-button {
-  @include flex($justify: center, $align: center);
-  width: $rounded-button-width;
-  height: $rounded-button-width;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
   border-radius: 20px;
-  background-color: $light-blue;
+  background-color: lightblue;
   cursor: pointer;
 
   &:hover {
-    background-color: $active-blue;
+    background-color: blue;
 
     svg path {
       fill: white;
@@ -20,11 +20,11 @@
     opacity: 0.5;
 
     &:hover {
-      background-color: $light-blue;
+      background-color: lightblue;
       cursor: default;
 
       svg path {
-        fill: $active-blue;
+        fill: blue;
       }
     }
   }

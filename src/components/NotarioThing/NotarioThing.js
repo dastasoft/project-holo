@@ -1,8 +1,27 @@
-import React from "react";
-import AsistentesList from "../AsistentesList";
-import AsistenteDetail from "../AsistenteDetail";
+import React, { useState, useEffect } from 'react';
 
-const NotarioThing = () => {
+import { useFetchData } from '../../customHooks';
+import AsistentesList from '../AsistentesList';
+import AsistenteDetail from '../AsistenteDetail';
+import {
+  getCita,
+  estadoFirmas,
+  getFirmaEstatus
+} from '../../services/constituciones';
+
+const renderLoading = () => (
+  <div className="zoom-call center-layout">
+    <p>Cargando...</p>
+  </div>
+);
+
+const renderError = () => (
+  <div className="zoom-call center-layout">
+    <p>Error inesperado</p>
+  </div>
+);
+
+const NotarioThing = ({ className }) => {
   const [asistente, setAsistente] = useState(null);
   const [asistenteIndex, setAsistenteIndex] = useState(null);
   const [statusFirmas, setStatusFirmas] = useState([]);
@@ -12,14 +31,14 @@ const NotarioThing = () => {
   useEffect(() => {
     const checkSignStatuses = async () => {
       const status = await estadoFirmas();
-      console.log("checkSignStatuses -> status", status);
+      console.log('checkSignStatuses -> status', status);
       setStatusFirmas(status.data);
     };
     const intervalHandler = setInterval(checkSignStatuses, 2000);
     return () => clearInterval(intervalHandler);
   }, []);
 
-  const handleSelectAsistente = (index) => {
+  const handleSelectAsistente = index => {
     setAsistenteIndex(index);
     setAsistente(data.Participantes[index]);
   };
@@ -45,9 +64,9 @@ const NotarioThing = () => {
   if (error) return renderError();
 
   return (
-    <div className="zoom-asistentes">
+    <div className={`${className} zoom-asistentes`}>
       <div
-        className={`asistentes-slide ${asistente === null ? "current" : ""}`}
+        className={`asistentes-slide ${asistente === null ? 'current' : ''}`}
       >
         <AsistentesList
           asistentes={data.Participantes}
@@ -56,7 +75,7 @@ const NotarioThing = () => {
         />
       </div>
       <div
-        className={`asistentes-slide ${asistente !== null ? "current" : ""}`}
+        className={`asistentes-slide ${asistente !== null ? 'current' : ''}`}
       >
         {asistente && (
           <AsistenteDetail

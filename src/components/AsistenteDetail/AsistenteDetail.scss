@@ -1,20 +1,21 @@
-@import '../../scss/abstracts';
-
 .asistente-detail {
-  @include flex($direction: column, $justify: flex-start, $align: flex-start);
+  display: flex;
+  flex-direction: column;
   height: calc(100vh - 8rem);
 }
 
 .asistente-detail-top {
-  @include flex();
+  display: flex;
+  ;
   width: 100%;
   padding-bottom: 2rem;
 
   .asistente-detail-top-info {
-    @include flex();
+    display: flex;
   }
+
   .asistente-detail-top-buttons {
-    @include flex();
+    display: flex;
 
     &>div {
       margin-left: 1rem;
@@ -29,38 +30,41 @@
 .asistente-detail-section {
   width: 100%;
   padding: 2rem;
-  border-top: 1px solid $grey;
+  border-top: 1px solid grey;
 
   &.name-section {
-    font-size: $xl;
-    color: $dark-grey;
+    font-size: 24px;
+    color: darkgrey;
     font-weight: bold;
   }
+
   &.dni-section {
-    font-size: $l;
-    color: $dark-grey;
+    font-size: 15px;
+    color: darkgrey;
 
     .status-section {
       margin-top: 1rem;
+
       .asistente-status {
         display: inline-block;
       }
     }
 
     .dni-section-extra {
-      font-size: $m;
+      font-size: 12px;
       margin-top: 0.5rem;
     }
   }
+
   &.pictures-section {
-    font-size: $l;
-    color: $dark-grey;
-    
+    font-size: 15px;
+    color: darkgrey;
+
     .dni-picture {
       width: 100%;
       max-width: 300px;
       margin: 2rem auto;
-      background-color: $dark-grey;
+      background-color: darkgrey;
 
       img {
         width: 100%;
@@ -73,16 +77,16 @@
   width: calc(100% + 8rem);
   margin: auto -4rem 2rem -4rem;
   text-align: center;
-  border-top: 1px solid $grey;
+  border-top: 1px solid grey;
 
-  button.app-button { 
-    background-color: $green;
+  button.app-button {
+    background-color: greenyellow;
     border-radius: 3px;
     width: 65%;
     padding: 12px 0;
     margin: 2rem auto;
-    font-size: $m;
-    color: $white;
+    font-size: 12px;
+    color: white;
     cursor: pointer;
   }
 }

@@ -1,23 +1,21 @@
-@import '../../scss/abstracts';
-
 .document-section {
   margin: 0 -4rem 2rem -4rem;
   padding: 0 4rem 2rem 4rem;
-  border-bottom: 1px solid $grey;
+  border-bottom: 1px solid grey;
 }
 
 .document-form {
   .form-row {
-    @include flex();
+    display: flex;
     width: 100%;
     margin-bottom: 1rem;
 
     .form-field {
       flex: 1 0 46%;
       max-width: 46%;
-      
+
       label {
-        display:block;
+        display: block;
         margin-bottom: 0.2rem;
         font-size: 1.2rem;
       }
@@ -26,53 +24,58 @@
 
   button {
     width: 100%;
-    background-color: $green;
+    background-color: greenyellow;
   }
 }
 
 .document-uploaded {
-  @include flex();
+  display: flex;
   width: 100%;
-  font-size: $m ;
+  font-size: 12px;
 }
 
 
 .asistentes-top {
-  @include flex();
+  display: flex;
   margin: 2rem -4rem;
   padding: 0 4rem;
 }
 
 .asistentes-list {
-  margin:2rem -4rem 0 -4rem;
+  margin: 2rem -4rem 0 -4rem;
   padding: 0 4rem;
-  border-bottom: 1px solid $grey;
+  border-bottom: 1px solid grey;
   height: calc(100vh - 490px);
   overflow: auto;
 
   .asistentes-list-item {
-    @include flex();
+    display: flex;
     padding: 1.5rem 1rem;
     cursor: pointer;
-    border-top: 2px solid $light-blue;
+    border-top: 2px solid lightblue;
 
     &:hover {
-      background-color: $highlight-blue;
+      background-color: lightgray;
     }
 
     .asistentes-list-item-info {
-      color: $dark-grey;
-      font-size: $m;
+      color: darkgrey;
+      font-size: 12px;
       flex: 1 0;
 
-      .asistentes-list-item-name { margin-bottom: 0.1rem; }
-      .asistentes-list-item-lastname { margin-bottom: 0.4rem; }
+      .asistentes-list-item-name {
+        margin-bottom: 0.1rem;
+      }
+
+      .asistentes-list-item-lastname {
+        margin-bottom: 0.4rem;
+      }
     }
 
     .asistentes-list-item-status {
       padding: 0 1rem;
     }
-    
+
     .asistentes-list-item-actions {
       padding: 0 1rem;
     }
@@ -85,14 +88,14 @@
   button {
     width: 80%;
     margin: 2rem auto;
-    background-color: $green;
+    background-color: greenyellow;
   }
 }
 
-button.app-button { 
+button.app-button {
   border-radius: 3px;
   padding: 12px;
-  font-size: $m;
-  color: $white;
+  font-size: 12px;
+  color: white;
   cursor: pointer;
 }

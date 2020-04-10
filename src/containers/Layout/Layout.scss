@@ -1,0 +1,22 @@
+.call-layout {
+    display: grid;
+    grid-template-areas:
+        'header header'
+        'call-room notario-thing';
+
+    grid-gap: 1em;
+
+
+    .header {
+        grid-area: header;
+    }
+
+    .call-room {
+        grid-area: call-room;
+    }
+
+    .notario-thing {
+        grid-area: notario-thing;
+    }
+
+}
