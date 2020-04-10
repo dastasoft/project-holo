@@ -41,7 +41,7 @@ const CallRoom = () => {
   };
 
   return (
-    <div>
+    <>
       <div style={{ display: 'flex', alignItems: 'stretch', padding: '8px' }}>
         <input
           style={{ marginRight: '8px' }}
@@ -71,7 +71,7 @@ const CallRoom = () => {
           <i className="fa fa-door-open" />
         </Button>
       </Buttons>
-    </div>
+    </>
   );
 };
 
