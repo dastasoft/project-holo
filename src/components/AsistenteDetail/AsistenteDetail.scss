@@ -1,0 +1,88 @@
+@import '../../scss/abstracts';
+
+.asistente-detail {
+  @include flex($direction: column, $justify: flex-start, $align: flex-start);
+  height: calc(100vh - 8rem);
+}
+
+.asistente-detail-top {
+  @include flex();
+  width: 100%;
+  padding-bottom: 2rem;
+
+  .asistente-detail-top-info {
+    @include flex();
+  }
+  .asistente-detail-top-buttons {
+    @include flex();
+
+    &>div {
+      margin-left: 1rem;
+    }
+  }
+
+  .top-title {
+    margin-left: 1rem;
+  }
+}
+
+.asistente-detail-section {
+  width: 100%;
+  padding: 2rem;
+  border-top: 1px solid $grey;
+
+  &.name-section {
+    font-size: $xl;
+    color: $dark-grey;
+    font-weight: bold;
+  }
+  &.dni-section {
+    font-size: $l;
+    color: $dark-grey;
+
+    .status-section {
+      margin-top: 1rem;
+      .asistente-status {
+        display: inline-block;
+      }
+    }
+
+    .dni-section-extra {
+      font-size: $m;
+      margin-top: 0.5rem;
+    }
+  }
+  &.pictures-section {
+    font-size: $l;
+    color: $dark-grey;
+    
+    .dni-picture {
+      width: 100%;
+      max-width: 300px;
+      margin: 2rem auto;
+      background-color: $dark-grey;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.asistente-bottom {
+  width: calc(100% + 8rem);
+  margin: auto -4rem 2rem -4rem;
+  text-align: center;
+  border-top: 1px solid $grey;
+
+  button.app-button { 
+    background-color: $green;
+    border-radius: 3px;
+    width: 65%;
+    padding: 12px 0;
+    margin: 2rem auto;
+    font-size: $m;
+    color: $white;
+    cursor: pointer;
+  }
+}

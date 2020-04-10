@@ -1,0 +1,31 @@
+@import '../../scss/abstracts';
+
+.rounded-button {
+  @include flex($justify: center, $align: center);
+  width: $rounded-button-width;
+  height: $rounded-button-width;
+  border-radius: 20px;
+  background-color: $light-blue;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $active-blue;
+
+    svg path {
+      fill: white;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.5;
+
+    &:hover {
+      background-color: $light-blue;
+      cursor: default;
+
+      svg path {
+        fill: $active-blue;
+      }
+    }
+  }
+}
