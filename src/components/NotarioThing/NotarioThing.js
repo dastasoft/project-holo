@@ -34,8 +34,8 @@ const NotarioThing = ({ className }) => {
       console.log('checkSignStatuses -> status', status);
       setStatusFirmas(status.data);
     };
-    const intervalHandler = setInterval(checkSignStatuses, 2000);
-    return () => clearInterval(intervalHandler);
+    //const intervalHandler = setInterval(checkSignStatuses, 2000);
+    //return () => clearInterval(intervalHandler);
   }, []);
 
   const handleSelectAsistente = index => {

@@ -2,14 +2,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   border-radius: 20px;
   background-color: lightblue;
   cursor: pointer;
 
   &:hover {
-    background-color: blue;
+    background-color: #227fbb;
 
     svg path {
       fill: white;
@@ -24,7 +24,7 @@
       cursor: default;
 
       svg path {
-        fill: blue;
+        fill: #227fbb;
       }
     }
   }

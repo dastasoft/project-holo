@@ -1,65 +1,18 @@
-.document-section {
-  margin: 0 -4rem 2rem -4rem;
-  padding: 0 4rem 2rem 4rem;
-  border-bottom: 1px solid grey;
-}
-
-.document-form {
-  .form-row {
-    display: flex;
-    width: 100%;
-    margin-bottom: 1rem;
-
-    .form-field {
-      flex: 1 0 46%;
-      max-width: 46%;
-
-      label {
-        display: block;
-        margin-bottom: 0.2rem;
-        font-size: 1.2rem;
-      }
-    }
-  }
-
-  button {
-    width: 100%;
-    background-color: greenyellow;
-  }
-}
-
-.document-uploaded {
-  display: flex;
-  width: 100%;
-  font-size: 12px;
-}
-
-
-.asistentes-top {
-  display: flex;
-  margin: 2rem -4rem;
-  padding: 0 4rem;
-}
-
 .asistentes-list {
-  margin: 2rem -4rem 0 -4rem;
-  padding: 0 4rem;
-  border-bottom: 1px solid grey;
-  height: calc(100vh - 490px);
-  overflow: auto;
 
   .asistentes-list-item {
     display: flex;
+    align-items: center;
     padding: 1.5rem 1rem;
     cursor: pointer;
-    border-top: 2px solid lightblue;
+    border-top: 1px solid lightblue;
 
     &:hover {
       background-color: lightgray;
     }
 
     .asistentes-list-item-info {
-      color: darkgrey;
+      color: grey;
       font-size: 12px;
       flex: 1 0;
 
@@ -86,16 +39,35 @@
   text-align: center;
 
   button {
-    width: 80%;
-    margin: 2rem auto;
-    background-color: greenyellow;
+    background-color: #2e3d7c;
+  }
+}
+
+.asistente-status {
+  text-transform: uppercase;
+  font-size: 10px;
+  padding: 0.4rem 0.8rem;
+
+  &.estado-0 {
+    background-color: lightblue;
+    color: #227fbb;
+  }
+
+  &.estado-1 {
+    background-color: lightblue;
+    color: #227fbb;
+  }
+
+  &.estado-2 {
+    background-color: green;
+    color: white;
   }
 }
 
 button.app-button {
   border-radius: 3px;
   padding: 12px;
-  font-size: 12px;
+  font-size: 15px;
   color: white;
   cursor: pointer;
 }

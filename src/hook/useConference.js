@@ -65,8 +65,6 @@ const interfaceConfig = {
 function useConference({
   roomName = 'AncertTest',
   roomDOM = '#root',
-  width,
-  height,
   customDomain = 'meet.jit.si',
   adminEmail = ''
 }) {
@@ -81,8 +79,6 @@ function useConference({
       new JitsiMeetExternalAPI(customDomain, {
         roomName,
         parentNode: document.querySelector(roomDOM),
-        width,
-        height,
         interfaceConfigOverwrite: interfaceConfig,
         userInfo: {
           email: adminEmail
