@@ -1,34 +1,39 @@
 .call-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas:
-    'header header header'
-    'call-room call-room notario-thing';
-  grid-template-rows: auto 85vh;
-
-  grid-gap: 1em;
-  .header {
-    grid-area: header;
-  }
-
-  .call-room {
-    grid-area: call-room;
-  }
-
-  .notario-thing {
-    grid-area: notario-thing;
-  }
-
-  @media (max-width: 600px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-      'header header header'
-      'call-room call-room call-room'
-      'notario-thing notario-thing notario-thing';
+        'header header header'
+        'call-room call-room notario-thing';
+    grid-template-rows: auto 85vh;
 
-    .call-room {
-      min-height: 300px;
+    grid-gap: 1em;
+
+    .header {
+        grid-area: header;
     }
 
-    grid-template-rows: auto 2fr 2fr;
-  }
+    .call-room {
+        grid-area: call-room;
+    }
+
+    .notario-thing {
+        grid-area: notario-thing;
+    }
+
+    @media (max-width: 600px) {
+        grid-template-areas:
+            'header header header'
+            'call-room call-room call-room'
+            'notario-thing notario-thing notario-thing';
+
+        .call-room {
+            height: 300px;
+
+            iframe {
+                height: 250px !important;
+            }
+        }
+
+        grid-template-rows: auto 2fr 2fr;
+    }
 }
