@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import useConference from '../../hook/useConference';
 
-const CallRoom = ({ className }) => {
+const CallRoom = ({ className, roomName }) => {
   const {
     isVideoEnabled,
     isAudioEnabled,
@@ -17,7 +17,7 @@ const CallRoom = ({ className }) => {
     hangup
   } = useConference({
     roomDOM: '#chatRoom',
-    roomName: 'grow-meeting'
+    roomName
   });
 
   useEffect(() => {
@@ -28,6 +28,9 @@ const CallRoom = ({ className }) => {
     <ChatRoom className={className}>
       <div className="chat-visor" id="chatRoom" />
       <div className="chat-buttons">
+        <Button type="button" onClick={toggleShareScreen}>
+          <i className="fa fa-user-plus" />
+        </Button>
         <Button type="button" onClick={toggleShareScreen}>
           <i className="fa fa-tv" />
         </Button>
@@ -50,23 +53,25 @@ const ChatRoom = styled.div`
   flex-direction: column;
   .chat-visor {
     flex-grow: 1;
+    background-color: grey;
   }
 
   .chat-buttons {
     display: flex;
-  justify-content: center;
-  background-color: black;
+    justify-content: center;
+    background-color: black;
 
-  > * {
-    margin: 5px 8px;
-  }
+    > * {
+      margin: 5px 8px;
+    }
 
-  > *:first-of-type {
-    margin-left: 0;
-  }
+    > *:first-of-type {
+      margin-left: 0;
+    }
 
-  > *:last-of-type {
-    margin-right: 0;
+    > *:last-of-type {
+      margin-right: 0;
+    }
   }
 `;
 

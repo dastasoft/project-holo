@@ -5,11 +5,11 @@ import CallRoom from '../../components/CallRoom';
 
 import './Layout.scss';
 
-const Layout = () => {
+const Layout = ({ roomName }) => {
   return (
     <div className="call-layout">
-      <Header className="header" />
-      <CallRoom className="call-room" />
+      <Header className="header" roomName={roomName} />
+      <CallRoom className="call-room" roomName={roomName} />
     </div>
   );
 };
