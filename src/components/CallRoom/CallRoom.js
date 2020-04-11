@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import useConference from '../../hook/useConference';
+import CallButton from '../CallButton';
 
 const CallRoom = ({ className, roomName }) => {
   const {
@@ -28,21 +29,27 @@ const CallRoom = ({ className, roomName }) => {
     <ChatRoom className={className}>
       <div className="chat-visor" id="chatRoom" />
       <div className="chat-buttons">
-        <Button type="button" onClick={toggleShareScreen}>
-          <i className="fa fa-user-plus" />
-        </Button>
-        <Button type="button" onClick={toggleShareScreen}>
-          <i className="fa fa-tv" />
-        </Button>
-        <Button type="button" onClick={toggleAudio}>
-          <i className={`fa fa-microphone${isAudioEnabled ? '' : '-slash'}`} />
-        </Button>
-        <Button type="button" onClick={toggleVideo}>
-          <i className={`fa fa-video${isVideoEnabled ? '' : '-slash'}`} />
-        </Button>
-        <Button type="button" className="exit" onClick={hangup}>
-          <i className="fa fa-phone-slash" />
-        </Button>
+        <CallButton
+          onClickHandler={toggleShareScreen}
+          iconClassName="fa fa-user-plus"
+        />
+        <CallButton
+          onClickHandler={toggleShareScreen}
+          iconClassName="fa fa-tv"
+        />
+        <CallButton
+          onClickHandler={toggleAudio}
+          iconClassName={`fa fa-microphone${isAudioEnabled ? '' : '-slash'}`}
+        />
+        <CallButton
+          onClickHandler={toggleVideo}
+          iconClassName={`fa fa-video${isVideoEnabled ? '' : '-slash'}`}
+        />
+        <CallButton
+          className="exit"
+          onClickHandler={hangup}
+          iconClassName="fa fa-phone-slash"
+        />
       </div>
     </ChatRoom>
   );
