@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import logo_signo from './logo_signo.gif';
-import logos from './logos.gif';
+import logo_signo from '../../assets/GrowMeeting.png';
 
 const Header = ({ className }) => {
   return (
     <Wrapper className={className}>
-      <img src={logo_signo} alt="Logo Signo" />
-      <img src={logos} alt="Logos" />
+      <img src={logo_signo} alt="Logo GrowMeeting" height="75px" />
     </Wrapper>
   );
 };

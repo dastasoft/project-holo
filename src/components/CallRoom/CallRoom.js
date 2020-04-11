@@ -17,7 +17,7 @@ const CallRoom = ({ className }) => {
     hangup
   } = useConference({
     roomDOM: '#chatRoom',
-    roomName: 'cris-test'
+    roomName: 'grow-meeting'
   });
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const CallRoom = ({ className }) => {
           <i className={`fa fa-video${isVideoEnabled ? '' : '-slash'}`} />
         </Button>
         <Button type="button" className="exit" onClick={hangup}>
-          <i className="fa fa-sign-out-alt" />
+          <i className="fa fa-phone-slash" />
         </Button>
       </div>
     </ChatRoom>
@@ -55,6 +55,7 @@ const ChatRoom = styled.div`
   .chat-buttons {
     display: flex;
   justify-content: center;
+  background-color: black;
 
   > * {
     margin: 5px 8px;
@@ -72,14 +73,14 @@ const ChatRoom = styled.div`
 const Button = styled.button`
   width: 48px;
   height: 48px;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.2);
   border: none;
-  color: #2e3d7c;
+  color: white;
   font-size: 24px;
   cursor: pointer;
-  border-radius: 20%;
+  border-radius: 24px;
   &.exit {
-    color: #db8918;
+    color: red;
     font-size: 26px;
   }
   }

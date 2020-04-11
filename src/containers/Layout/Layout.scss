@@ -1,12 +1,11 @@
 .call-layout {
     display: grid;
+    height: 100vh;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
         'header header header'
-        'call-room call-room notario-thing';
-    grid-template-rows: auto 85vh;
-
-    grid-gap: 1em;
+        'call-room call-room call-room';
+    grid-template-rows: auto 1fr;
 
     .header {
         grid-area: header;
@@ -16,24 +15,4 @@
         grid-area: call-room;
     }
 
-    .notario-thing {
-        grid-area: notario-thing;
-    }
-
-    @media (max-width: 600px) {
-        grid-template-areas:
-            'header header header'
-            'call-room call-room call-room'
-            'notario-thing notario-thing notario-thing';
-
-        .call-room {
-            height: 300px;
-
-            iframe {
-                height: 250px !important;
-            }
-        }
-
-        grid-template-rows: auto 2fr 2fr;
-    }
 }
