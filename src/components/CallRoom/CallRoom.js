@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import useConference from '../../hook/useConference';
 import CallButton from '../CallButton';
 
-const CallRoom = ({ className, roomName }) => {
+const CallRoom = ({ className, roomName, onParticipantCount }) => {
   const {
     isVideoEnabled,
     isAudioEnabled,
@@ -15,7 +15,8 @@ const CallRoom = ({ className, roomName }) => {
     toggleVideo,
     toggleChat,
     toggleShareScreen,
-    hangup
+    hangup,
+    participantNumber
   } = useConference({
     roomDOM: '#chatRoom',
     roomName
@@ -24,6 +25,10 @@ const CallRoom = ({ className, roomName }) => {
   useEffect(() => {
     startRoom();
   }, []);
+
+  useEffect(() => {
+    onParticipantCount(participantNumber);
+  }, [participantNumber]);
 
   return (
     <ChatRoom className={className}>

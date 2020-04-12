@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const interfaceConfig = {
   DEFAULT_BACKGROUND: 'grey',
@@ -72,6 +72,7 @@ function useConference({
   const [isAudioEnabled, setIsAudioEnabled] = useState(true);
   const [isChatEnabled, setIsChatEnabled] = useState(false);
   const [isScreenShareEnabled, setIsScreenShareEnabled] = useState(false);
+  const [participantNumber, setParticipantNumber] = useState(0);
 
   const startRoom = () => {
     setApi(
@@ -111,6 +112,22 @@ function useConference({
     api.executeCommand('hangup');
   };
 
+  const participantManagement = () => {
+    setParticipantNumber(api.getNumberOfParticipants());
+  };
+
+  useEffect(() => {
+    if (api) {
+      api.addEventListeners({
+        participantJoined: ({ id, displayName }) => participantManagement(),
+        participantLeft: ({ id }) => participantManagement(),
+        participantKickedOut: ({ kicked, kicker }) => participantManagement(),
+        videoConferenceJoined: ({ roomName, id, displayName, avatarURL }) =>
+          participantManagement()
+      });
+    }
+  }, [api]);
+
   return {
     isVideoEnabled,
     isAudioEnabled,
@@ -121,7 +138,8 @@ function useConference({
     toggleVideo,
     toggleChat,
     toggleShareScreen,
-    hangup
+    hangup,
+    participantNumber
   };
 }
 

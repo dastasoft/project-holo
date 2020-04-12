@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Input from '../../components/ReactJedisUI/RJInput';
 import Button from '../../components/ReactJedisUI/RJButton';
 import logo from '../../assets/GrowMeeting.png';
+import { generateName } from '../../utils/randomName';
 
 const Home = ({ onRoomName }) => {
   const [roomName, setRoomName] = useState('');
@@ -13,7 +14,7 @@ const Home = ({ onRoomName }) => {
   const onSubmitHandler = ev => {
     ev.preventDefault();
     if (roomName.length > 0) {
-      onRoomName(roomName);
+      onRoomName(`${roomName}-${generateName()}`);
     }
   };
 
