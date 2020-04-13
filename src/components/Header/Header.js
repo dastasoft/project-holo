@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import logo from '../../assets/GrowMeeting.png';
+import { GlobalContext } from '../../context/globalContext';
 
-const Header = ({ className, roomName, participantCount }) => {
+const Header = ({ className }) => {
+  const { roomName, participantCount } = useContext(GlobalContext);
+
   return (
     <Wrapper className={className}>
       <img src={logo} alt="Logo GrowMeeting" height="75px" />

@@ -1,19 +1,20 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 import useConference from '../../hook/useConference';
 import CallButton from '../CallButton';
+import { GlobalContext } from '../../context/globalContext';
 
-const CallRoom = ({ className, roomName, onParticipantCount }) => {
+const CallRoom = ({ className }) => {
+  const { roomName, setParticipantCount } = useContext(GlobalContext);
+
   const {
     isVideoEnabled,
     isAudioEnabled,
-    isChatEnabled,
     startRoom,
     toggleAudio,
     toggleVideo,
-    toggleChat,
     toggleShareScreen,
     hangup,
     participantNumber
@@ -27,7 +28,7 @@ const CallRoom = ({ className, roomName, onParticipantCount }) => {
   }, []);
 
   useEffect(() => {
-    onParticipantCount(participantNumber);
+    setParticipantCount(participantNumber);
   }, [participantNumber]);
 
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { string, func } from 'prop-types';
 
 const CallButtonBase = ({ className, onClickHandler, iconClassName }) => (
-  <button type="button" className={className} onClickHandler={onClickHandler}>
+  <button type="button" className={className} onClick={onClickHandler}>
     <i className={iconClassName} />
   </button>
 );

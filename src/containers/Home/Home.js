@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
 import Input from '../../components/ReactJedisUI/RJInput';
 import Button from '../../components/ReactJedisUI/RJButton';
 import logo from '../../assets/GrowMeeting.png';
 import { generateName } from '../../utils/randomName';
+import { GlobalContext } from '../../context/globalContext';
 
-const Home = ({ onRoomName }) => {
-  const [roomName, setRoomName] = useState('');
+const Home = () => {
+  const [inputText, setInputText] = useState('');
+  const { setRoomName } = useContext(GlobalContext);
 
-  const inputChangeHandler = ev => setRoomName(ev.target.value);
+  const inputChangeHandler = ev => setInputText(ev.target.value);
 
   const onSubmitHandler = ev => {
     ev.preventDefault();
-    if (roomName.length > 0) {
-      onRoomName(`${roomName}-${generateName()}`);
+    if (inputText.length > 0) {
+      setRoomName(`${inputText}-${generateName()}`);
     }
   };
 
@@ -25,8 +27,9 @@ const Home = ({ onRoomName }) => {
         <Input
           type="text"
           placeholder="Join or Create Room"
-          value={roomName}
+          value={inputText}
           onChange={inputChangeHandler}
+          autoFocus
         />
         <Button>SEND</Button>
       </form>
