@@ -7,7 +7,9 @@ import { GlobalContext } from './context/globalContext';
 import './index.scss';
 
 const App = () => {
-  const [roomName, setRoomName] = useState(null);
+  const [roomName, setRoomName] = useState(
+    window.location.pathname.replace('/', '')
+  );
   const [participantCount, setParticipantCount] = useState(0);
 
   return (
