@@ -6,10 +6,8 @@ import useConference from '../../hook/useConference';
 import CallButton from '../CallButton';
 import { GlobalContext } from '../../context/globalContext';
 
-const CallRoom = ({ className }) => {
-  const { roomName, setRoomName, setParticipantCount } = useContext(
-    GlobalContext
-  );
+const CallRoom = ({ className, history }) => {
+  const { roomName, setParticipantCount } = useContext(GlobalContext);
 
   const {
     isVideoEnabled,
@@ -35,8 +33,8 @@ const CallRoom = ({ className }) => {
   });
 
   useEffect(() => {
-    startRoom();
-  }, []);
+    if (roomName) startRoom();
+  }, [roomName]);
 
   useEffect(() => {
     setParticipantCount(participantNumber);
@@ -64,7 +62,7 @@ const CallRoom = ({ className }) => {
         />
         <CallButton
           className="exit"
-          onClickHandler={() => setRoomName('')}
+          onClickHandler={() => history.push('')}
           iconClassName="fa fa-phone-slash"
         />
       </div>
