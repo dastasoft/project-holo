@@ -73,6 +73,9 @@ function useConference({
   const [isChatEnabled, setIsChatEnabled] = useState(false);
   const [isScreenShareEnabled, setIsScreenShareEnabled] = useState(false);
   const [participantNumber, setParticipantNumber] = useState(0);
+  const [audioInputs, setAudioInputs] = useState([]);
+  const [audioOutputs, setAudioOutputs] = useState([]);
+  const [videoInputs, setVideoInputs] = useState([]);
 
   const startRoom = () => {
     setApi(
@@ -116,6 +119,36 @@ function useConference({
     setParticipantNumber(api.getNumberOfParticipants());
   };
 
+  const getMicrophones = () => {
+    api
+      .getAvailableDevices()
+      .then(({ audioInput }) => setAudioInputs(audioInput));
+  };
+
+  const getOutputAudio = () => {
+    api
+      .getAvailableDevices()
+      .then(({ audioOutput }) => setAudioOutputs(audioOutput));
+  };
+
+  const getVideo = () => {
+    api
+      .getAvailableDevices()
+      .then(({ videoInput }) => setVideoInputs(videoInput));
+  };
+
+  const setMicrophone = (deviceLabel, deviceId) => {
+    api.setAudioInputDevice(deviceLabel, deviceId);
+  };
+
+  const setOutputAudio = (deviceLabel, deviceId) => {
+    api.setAudioOutputDevice(deviceLabel, deviceId);
+  };
+
+  const setVideo = (deviceLabel, deviceId) => {
+    api.setVideoInputDevice(deviceLabel, deviceId);
+  };
+
   useEffect(() => {
     if (api) {
       api.addEventListeners({
@@ -125,6 +158,10 @@ function useConference({
         videoConferenceJoined: ({ roomName, id, displayName, avatarURL }) =>
           participantManagement()
       });
+
+      getMicrophones();
+      getOutputAudio();
+      getVideo();
     }
   }, [api]);
 
@@ -139,6 +176,15 @@ function useConference({
     toggleChat,
     toggleShareScreen,
     hangup,
+    getMicrophones,
+    setMicrophone,
+    audioInputs,
+    getOutputAudio,
+    setOutputAudio,
+    audioOutputs,
+    getVideo,
+    setVideo,
+    videoInputs,
     participantNumber
   };
 }

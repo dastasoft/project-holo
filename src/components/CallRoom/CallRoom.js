@@ -17,6 +17,15 @@ const CallRoom = ({ className }) => {
     toggleVideo,
     toggleShareScreen,
     hangup,
+    getMicrophones,
+    setMicrophone,
+    audioInputs,
+    getOutputAudio,
+    setOutputAudio,
+    audioOutputs,
+    getVideo,
+    setVideo,
+    videoInputs,
     participantNumber
   } = useConference({
     roomDOM: '#chatRoom',
@@ -56,6 +65,25 @@ const CallRoom = ({ className }) => {
           onClickHandler={hangup}
           iconClassName="fa fa-phone-slash"
         />
+      </div>
+      <div>
+        <select id="audioInput" name="audioInput" onClick={getMicrophones}>
+          {audioInputs.map(({ deviceId, label }) => (
+            <option value={deviceId}>{label}</option>
+          ))}
+        </select>
+
+        <select id="audioOutput" name="audioOutput" onClick={getOutputAudio}>
+          {audioOutputs.map(({ deviceId, label }) => (
+            <option value={deviceId}>{label}</option>
+          ))}
+        </select>
+
+        <select id="videoInput" name="videoInput" onClick={getVideo}>
+          {videoInputs.map(({ deviceId, label }) => (
+            <option value={deviceId}>{label}</option>
+          ))}
+        </select>
       </div>
     </ChatRoom>
   );
