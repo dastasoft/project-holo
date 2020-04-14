@@ -7,7 +7,9 @@ import CallButton from '../CallButton';
 import { GlobalContext } from '../../context/globalContext';
 
 const CallRoom = ({ className }) => {
-  const { roomName, setParticipantCount } = useContext(GlobalContext);
+  const { roomName, setRoomName, setParticipantCount } = useContext(
+    GlobalContext
+  );
 
   const {
     isVideoEnabled,
@@ -16,7 +18,6 @@ const CallRoom = ({ className }) => {
     toggleAudio,
     toggleVideo,
     toggleShareScreen,
-    hangup,
     participantNumber
   } = useConference({
     roomDOM: '#chatRoom',
@@ -53,7 +54,7 @@ const CallRoom = ({ className }) => {
         />
         <CallButton
           className="exit"
-          onClickHandler={hangup}
+          onClickHandler={() => setRoomName('')}
           iconClassName="fa fa-phone-slash"
         />
       </div>
