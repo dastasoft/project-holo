@@ -43,7 +43,7 @@ const CallRoom = ({ className, history }) => {
   return (
     <ChatRoom className={className}>
       <div className="chat-visor" id="chatRoom" />
-      <div className="chat-buttons">
+      <div className="chat-buttons" style={{ display: 'none' }}>
         <CallButton
           onClickHandler={toggleShareScreen}
           iconClassName="fa fa-user-plus"
@@ -66,7 +66,7 @@ const CallRoom = ({ className, history }) => {
           iconClassName="fa fa-phone-slash"
         />
       </div>
-      <div>
+      <div style={{ display: 'none' }}>
         <select id="audioInput" name="audioInput" onClick={getMicrophones}>
           {audioInputs.map(({ deviceId, label }) => (
             <option value={deviceId}>{label}</option>

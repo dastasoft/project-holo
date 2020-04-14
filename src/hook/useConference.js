@@ -24,8 +24,43 @@ const interfaceConfig = {
   LANG_DETECTION: true,
   INVITATION_POWERED_BY: false,
   AUTHENTICATION_ENABLE: true,
-  TOOLBAR_BUTTONS: [],
-  SETTINGS_SECTIONS: [],
+  TOOLBAR_BUTTONS: [
+    'microphone',
+    'camera',
+    'closedcaptions',
+    'desktop',
+    'fullscreen',
+    'fodeviceselection',
+    'hangup',
+    'profile',
+    'info',
+    'chat',
+    'recording',
+    'livestreaming',
+    'etherpad',
+    'sharedvideo',
+    'settings',
+    'raisehand',
+    'videoquality',
+    'filmstrip',
+    'invite',
+    'feedback',
+    'stats',
+    'shortcuts',
+    'tileview',
+    'videobackgroundblur',
+    'download',
+    'help',
+    'mute-everyone'
+  ],
+
+  SETTINGS_SECTIONS: [
+    'devices',
+    'language',
+    'moderator',
+    'profile',
+    'calendar'
+  ],
   VIDEO_LAYOUT_FIT: 'both',
   filmStripOnly: false,
   VERTICAL_FILMSTRIP: true,
@@ -47,7 +82,7 @@ const interfaceConfig = {
   LIVE_STREAMING_HELP_LINK: 'https://jitsi.org/live',
   MOBILE_APP_PROMO: false,
   MAXIMUM_ZOOMING_COEFFICIENT: 1.3,
-  SUPPORT_URL: 'https://notariado.org/',
+  SUPPORT_URL: 'https://community.jitsi.org/',
   CONNECTION_INDICATOR_AUTO_HIDE_ENABLED: true,
   CONNECTION_INDICATOR_AUTO_HIDE_TIMEOUT: 5000,
   CONNECTION_INDICATOR_DISABLED: false,
@@ -82,6 +117,9 @@ function useConference({
       new JitsiMeetExternalAPI(customDomain, {
         roomName,
         parentNode: document.querySelector(roomDOM),
+        configOverwrite: {
+          defaultLanguage: 'es'
+        },
         interfaceConfigOverwrite: interfaceConfig,
         userInfo: {
           email: adminEmail
