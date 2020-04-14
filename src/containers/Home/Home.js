@@ -7,7 +7,7 @@ import logo from '../../assets/GrowMeeting.png';
 import { generateName } from '../../utils/randomName';
 import { GlobalContext } from '../../context/globalContext';
 
-const Home = () => {
+const Home = ({ history }) => {
   const [inputText, setInputText] = useState('');
   const { setRoomName } = useContext(GlobalContext);
 
@@ -16,7 +16,9 @@ const Home = () => {
   const onSubmitHandler = ev => {
     ev.preventDefault();
     if (inputText.length > 0) {
-      setRoomName(`${inputText}-${generateName()}`);
+      const roomName = `${inputText}-${generateName()}`;
+      setRoomName(roomName);
+      history.push(`/call/${roomName}`);
     }
   };
 

@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { render } from 'react-dom';
 
-import Layout from './containers/Layout';
-import Home from './containers/Home';
+import Routes from './routes/routes';
 import { GlobalContext } from './context/globalContext';
 import './index.scss';
 
 const App = () => {
-  const [roomName, setRoomName] = useState(
-    window.location.pathname.replace('/', '')
-  );
+  const [roomName, setRoomName] = useState(null);
   const [participantCount, setParticipantCount] = useState(0);
 
   return (
@@ -17,7 +14,7 @@ const App = () => {
       <GlobalContext.Provider
         value={{ roomName, setRoomName, participantCount, setParticipantCount }}
       >
-        {roomName ? <Layout /> : <Home />}
+        <Routes />
       </GlobalContext.Provider>
     </>
   );
