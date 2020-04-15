@@ -9,6 +9,7 @@ const App = () => {
   const [roomName, setRoomName] = useState(null);
   const [roomPassword, setRoomPassword] = useState('');
   const [participantCount, setParticipantCount] = useState(0);
+  const [party, setParty] = useState(false);
 
   return (
     <>
@@ -19,7 +20,9 @@ const App = () => {
           participantCount,
           setParticipantCount,
           roomPassword,
-          setRoomPassword
+          setRoomPassword,
+          party,
+          setParty
         }}
       >
         <Routes />

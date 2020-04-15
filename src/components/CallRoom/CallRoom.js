@@ -7,7 +7,7 @@ import CallButton from '../CallButton';
 import { GlobalContext } from '../../context/globalContext';
 
 const CallRoom = ({ className, history }) => {
-  const { roomName, roomPassword, setParticipantCount } = useContext(
+  const { roomName, roomPassword, setParticipantCount, setParty } = useContext(
     GlobalContext
   );
 
@@ -80,23 +80,33 @@ const CallRoom = ({ className, history }) => {
           onClickHandler={onFullScreen}
           iconClassName="fa fa-window-maximize"
         />
+        <CallButton
+          onClickHandler={() => setParty(true)}
+          iconClassName="fas fa-gift"
+        />
       </div>
       <div style={{ display: 'none' }}>
         <select id="audioInput" name="audioInput" onClick={getAudioInputs}>
           {audioInputList.map(({ deviceId, label }) => (
-            <option value={deviceId}>{label}</option>
+            <option key={deviceId} value={deviceId}>
+              {label}
+            </option>
           ))}
         </select>
 
         <select id="audioOutput" name="audioOutput" onClick={getAudioOutputs}>
           {audioOutputList.map(({ deviceId, label }) => (
-            <option value={deviceId}>{label}</option>
+            <option key={deviceId} value={deviceId}>
+              {label}
+            </option>
           ))}
         </select>
 
         <select id="videoInput" name="videoInput" onClick={getVideoInputs}>
           {videoInputList.map(({ deviceId, label }) => (
-            <option value={deviceId}>{label}</option>
+            <option key={deviceId} value={deviceId}>
+              {label}
+            </option>
           ))}
         </select>
       </div>
