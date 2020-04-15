@@ -24,43 +24,8 @@ const interfaceConfig = {
   LANG_DETECTION: true,
   INVITATION_POWERED_BY: false,
   AUTHENTICATION_ENABLE: true,
-  TOOLBAR_BUTTONS: [
-    'microphone',
-    'camera',
-    'closedcaptions',
-    'desktop',
-    'fullscreen',
-    'fodeviceselection',
-    'hangup',
-    'profile',
-    'info',
-    'chat',
-    'recording',
-    'livestreaming',
-    'etherpad',
-    'sharedvideo',
-    'settings',
-    'raisehand',
-    'videoquality',
-    'filmstrip',
-    'invite',
-    'feedback',
-    'stats',
-    'shortcuts',
-    'tileview',
-    'videobackgroundblur',
-    'download',
-    'help',
-    'mute-everyone'
-  ],
-
-  SETTINGS_SECTIONS: [
-    'devices',
-    'language',
-    'moderator',
-    'profile',
-    'calendar'
-  ],
+  TOOLBAR_BUTTONS: [],
+  SETTINGS_SECTIONS: [],
   VIDEO_LAYOUT_FIT: 'both',
   filmStripOnly: false,
   VERTICAL_FILMSTRIP: true,
@@ -168,7 +133,8 @@ function useConference({
   };
 
   const participantManagement = () => {
-    setParticipantNumber(api.getNumberOfParticipants());
+    const num = api.getNumberOfParticipants();
+    setParticipantNumber(num > 0 ? num : 0);
   };
 
   const audioMuteChangeHandler = muted => setIsAudioEnabled(!muted);
