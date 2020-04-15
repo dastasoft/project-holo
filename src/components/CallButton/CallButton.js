@@ -25,6 +25,14 @@ const CallButton = styled(CallButtonBase)`
   &.exit:hover {
     background-color: white;
   }
+
+  &.active {
+    color: orange;
+  }
+
+  &.active:hover {
+    background-color: white;
+  }
 `;
 
 export default CallButton;

@@ -7,14 +7,21 @@ import { GlobalContext } from '../../context/globalContext';
 const Header = ({ className }) => {
   const { roomName, participantCount } = useContext(GlobalContext);
 
+  const onClipboardHandler = () => {
+    navigator.clipboard.writeText(window.location.href);
+  };
+
   return (
     <Wrapper className={className}>
       <img src={logo} alt="Logo GrowMeeting" height="75px" />
       <div>
-        <i className="fas fa-users" />
+        <i className="far fa-user" />
         <ParticipantCount>{participantCount}</ParticipantCount>
       </div>
-      <span>{roomName}</span>
+      <Room>
+        <span>{roomName}</span>
+        <i className="far fa-copy" onClick={onClipboardHandler} role="button" />
+      </Room>
     </Wrapper>
   );
 };
@@ -32,6 +39,19 @@ const Wrapper = styled.header`
 
 const ParticipantCount = styled.span`
   margin-left: 8px;
+`;
+
+const Room = styled.div`
+  display: flex;
+  align-items: center;
+
+  > *:first-of-type {
+    margin-right: 8px;
+  }
+
+  i {
+    cursor: pointer;
+  }
 `;
 
 export default Header;

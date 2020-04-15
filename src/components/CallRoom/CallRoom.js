@@ -12,24 +12,28 @@ const CallRoom = ({ className, history }) => {
   );
 
   const {
-    setPassword,
     isVideoEnabled,
     isAudioEnabled,
-    startRoom,
+    isChatEnabled,
+    isScreenShareEnabled,
+    isTileViewEnabled,
+    participantNumber,
+    audioInputList,
+    audioOutputList,
+    videoInputList,
     toggleAudio,
     toggleVideo,
+    toggleChat,
     toggleShareScreen,
+    toggleMosaic,
     hangup,
-    getMicrophones,
-    setMicrophone,
-    audioInputs,
-    getOutputAudio,
-    setOutputAudio,
-    audioOutputs,
-    getVideo,
-    setVideo,
-    videoInputs,
-    participantNumber
+    getAudioInputs,
+    setAudioInputs,
+    getAudioOutputs,
+    setAudioOutputs,
+    getVideoInputs,
+    setVideoInputs,
+    startRoom
   } = useConference({
     roomDOM: '#chatRoom',
     roomName,
@@ -49,10 +53,7 @@ const CallRoom = ({ className, history }) => {
       <div className="chat-visor" id="chatRoom" />
       <div className="chat-buttons">
         <CallButton
-          onClickHandler={toggleShareScreen}
-          iconClassName="fa fa-user-plus"
-        />
-        <CallButton
+          className={isScreenShareEnabled ? 'active' : ''}
           onClickHandler={toggleShareScreen}
           iconClassName="fa fa-tv"
         />
@@ -69,22 +70,27 @@ const CallRoom = ({ className, history }) => {
           onClickHandler={() => history.push('')}
           iconClassName="fa fa-phone-slash"
         />
+        <CallButton
+          className={isTileViewEnabled ? 'active' : ''}
+          onClickHandler={toggleMosaic}
+          iconClassName="fas fa-border-all"
+        />
       </div>
-      <div>
-        <select id="audioInput" name="audioInput" onClick={getMicrophones}>
-          {audioInputs.map(({ deviceId, label }) => (
+      <div style={{ display: 'none' }}>
+        <select id="audioInput" name="audioInput" onClick={getAudioInputs}>
+          {audioInputList.map(({ deviceId, label }) => (
             <option value={deviceId}>{label}</option>
           ))}
         </select>
 
-        <select id="audioOutput" name="audioOutput" onClick={getOutputAudio}>
-          {audioOutputs.map(({ deviceId, label }) => (
+        <select id="audioOutput" name="audioOutput" onClick={getAudioOutputs}>
+          {audioOutputList.map(({ deviceId, label }) => (
             <option value={deviceId}>{label}</option>
           ))}
         </select>
 
-        <select id="videoInput" name="videoInput" onClick={getVideo}>
-          {videoInputs.map(({ deviceId, label }) => (
+        <select id="videoInput" name="videoInput" onClick={getVideoInputs}>
+          {videoInputList.map(({ deviceId, label }) => (
             <option value={deviceId}>{label}</option>
           ))}
         </select>

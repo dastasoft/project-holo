@@ -108,10 +108,11 @@ function useConference({
   const [isAudioEnabled, setIsAudioEnabled] = useState(true);
   const [isChatEnabled, setIsChatEnabled] = useState(false);
   const [isScreenShareEnabled, setIsScreenShareEnabled] = useState(false);
+  const [isTileViewEnabled, setIsTileViewEnabled] = useState(false);
   const [participantNumber, setParticipantNumber] = useState(0);
-  const [audioInputs, setAudioInputs] = useState([]);
-  const [audioOutputs, setAudioOutputs] = useState([]);
-  const [videoInputs, setVideoInputs] = useState([]);
+  const [audioInputList, setAudioInputList] = useState([]);
+  const [audioOutputList, setAudioOutputList] = useState([]);
+  const [videoInputList, setVideoInputList] = useState([]);
 
   const startRoom = () => {
     setApi(
@@ -129,29 +130,23 @@ function useConference({
     );
   };
 
-  const setPassword = newPassword => {
-    api.executeCommand('password', newPassword);
-  };
-
   const toggleAudio = () => {
     api.executeCommand('toggleAudio');
-    api.isAudioMuted().then(muted => {
-      setIsAudioEnabled(!muted);
-    });
   };
   const toggleVideo = () => {
     api.executeCommand('toggleVideo');
-    setIsVideoEnabled(!isVideoEnabled);
   };
 
   const toggleChat = () => {
     api.executeCommand('toggleChat');
-    setIsChatEnabled(!isChatEnabled);
   };
 
   const toggleShareScreen = () => {
     api.executeCommand('toggleShareScreen');
-    setIsScreenShareEnabled(!isScreenShareEnabled);
+  };
+
+  const toggleMosaic = () => {
+    api.executeCommand('toggleTileView');
   };
 
   const hangup = () => {
@@ -162,35 +157,51 @@ function useConference({
     setParticipantNumber(api.getNumberOfParticipants());
   };
 
-  const getMicrophones = () => {
+  const audioMuteChangeHandler = muted => setIsAudioEnabled(!muted);
+  const videoMuteChangeHandler = muted => setIsVideoEnabled(!muted);
+  const screenSharingChangeHandler = enable => setIsScreenShareEnabled(enable);
+  const tileViewChangedHandler = enabled => setIsTileViewEnabled(enabled);
+
+  const getAudioInputs = () => {
     api
       .getAvailableDevices()
-      .then(({ audioInput }) => setAudioInputs(audioInput));
+      .then(({ audioInput }) => setAudioInputList(audioInput));
   };
 
-  const getOutputAudio = () => {
+  const getAudioOutputs = () => {
     api
       .getAvailableDevices()
-      .then(({ audioOutput }) => setAudioOutputs(audioOutput));
+      .then(({ audioOutput }) => setAudioOutputList(audioOutput));
   };
 
-  const getVideo = () => {
+  const getVideoInputs = () => {
     api
       .getAvailableDevices()
-      .then(({ videoInput }) => setVideoInputs(videoInput));
+      .then(({ videoInput }) => setVideoInputList(videoInput));
   };
 
-  const setMicrophone = (deviceLabel, deviceId) => {
+  const setAudioInputs = (deviceLabel, deviceId) => {
     api.setAudioInputDevice(deviceLabel, deviceId);
   };
 
-  const setOutputAudio = (deviceLabel, deviceId) => {
+  const setAudioOutputs = (deviceLabel, deviceId) => {
     api.setAudioOutputDevice(deviceLabel, deviceId);
   };
 
-  const setVideo = (deviceLabel, deviceId) => {
+  const setVideoInputs = (deviceLabel, deviceId) => {
     api.setVideoInputDevice(deviceLabel, deviceId);
   };
+
+  const setPassword = newPassword => {
+    api.executeCommand('password', newPassword);
+  };
+
+  useEffect(() => {
+    // It's a good practice to remove the conference before the page is unloaded.
+    return () => {
+      if (api) api.dispose();
+    };
+  }, []);
 
   useEffect(() => {
     if (api) {
@@ -201,37 +212,42 @@ function useConference({
         videoConferenceJoined: ({ roomName, id, displayName, avatarURL }) => {
           setPassword(password);
           participantManagement();
-        }
+        },
+        audioMuteStatusChanged: ({ muted }) => audioMuteChangeHandler(muted),
+        videoMuteStatusChanged: ({ muted }) => videoMuteChangeHandler(muted),
+        screenSharingStatusChanged: ({ on }) => screenSharingChangeHandler(on),
+        tileViewChanged: ({ enabled }) => tileViewChangedHandler(enabled)
       });
 
-      getMicrophones();
-      getOutputAudio();
-      getVideo();
+      getAudioInputs();
+      getAudioOutputs();
+      getVideoInputs();
     }
   }, [api]);
 
   return {
-    setPassword,
     isVideoEnabled,
     isAudioEnabled,
     isChatEnabled,
     isScreenShareEnabled,
-    startRoom,
+    isTileViewEnabled,
+    participantNumber,
+    audioInputList,
+    audioOutputList,
+    videoInputList,
     toggleAudio,
     toggleVideo,
     toggleChat,
     toggleShareScreen,
+    toggleMosaic,
     hangup,
-    getMicrophones,
-    setMicrophone,
-    audioInputs,
-    getOutputAudio,
-    setOutputAudio,
-    audioOutputs,
-    getVideo,
-    setVideo,
-    videoInputs,
-    participantNumber
+    getAudioInputs,
+    setAudioInputs,
+    getAudioOutputs,
+    setAudioOutputs,
+    getVideoInputs,
+    setVideoInputs,
+    startRoom
   };
 }
 
