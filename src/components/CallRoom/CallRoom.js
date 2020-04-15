@@ -21,6 +21,7 @@ const CallRoom = ({ className, history }) => {
     audioInputList,
     audioOutputList,
     videoInputList,
+    onFullScreen,
     toggleAudio,
     toggleVideo,
     toggleChat,
@@ -74,6 +75,10 @@ const CallRoom = ({ className, history }) => {
           className={isTileViewEnabled ? 'active' : ''}
           onClickHandler={toggleMosaic}
           iconClassName="fas fa-border-all"
+        />
+        <CallButton
+          onClickHandler={onFullScreen}
+          iconClassName="fa fa-window-maximize"
         />
       </div>
       <div style={{ display: 'none' }}>

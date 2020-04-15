@@ -1,21 +1,38 @@
 import React from 'react';
-import { string, func } from 'prop-types';
+import { bool, string, func, node } from 'prop-types';
 
-const CallButtonBase = ({ className, onClickHandler, iconClassName }) => (
+const CallButtonBase = ({
+  className,
+  onClickHandler,
+  iconClassName,
+  isCustom,
+  customImg,
+  customAlt
+}) => (
   <button type="button" className={className} onClick={onClickHandler}>
-    <i className={iconClassName} />
+    {isCustom ? (
+      <img src={customImg} alt={customAlt} />
+    ) : (
+      <i className={iconClassName} />
+    )}
   </button>
 );
 
 CallButtonBase.propTypes = {
   className: string.isRequired,
   onClickHandler: func,
-  iconClassName: string
+  iconClassName: string,
+  isCustom: bool,
+  customImg: node,
+  customAlt: string
 };
 
 CallButtonBase.defaultProps = {
   onClickHandler: () => {},
-  iconClassName: ''
+  iconClassName: '',
+  isCustom: false,
+  customImg: null,
+  customAlt: ''
 };
 
 export default CallButtonBase;

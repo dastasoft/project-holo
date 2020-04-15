@@ -8,7 +8,7 @@ const CallButton = styled(CallButtonBase)`
   background-color: rgba(255, 255, 255, 0.2);
   border: none;
   color: white;
-  font-size: 24px;
+  font-size: ${({ isCustom }) => (isCustom ? '' : '24px')};
   cursor: pointer;
   border-radius: 24px;
 

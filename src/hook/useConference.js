@@ -130,6 +130,20 @@ function useConference({
     );
   };
 
+  const onFullScreen = () => {
+    const video = document.querySelector(roomDOM);
+
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+      video.mozRequestFullScreen();
+    } else if (video.msRequestFullscreen) {
+      video.msRequestFullscreen();
+    }
+  };
+
   const toggleAudio = () => {
     api.executeCommand('toggleAudio');
   };
@@ -235,6 +249,7 @@ function useConference({
     audioInputList,
     audioOutputList,
     videoInputList,
+    onFullScreen,
     toggleAudio,
     toggleVideo,
     toggleChat,
