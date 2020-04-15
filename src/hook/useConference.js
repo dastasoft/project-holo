@@ -100,7 +100,8 @@ function useConference({
   roomName = 'Custom Room',
   roomDOM = '#root',
   customDomain = 'meet.jit.si',
-  adminEmail = ''
+  adminEmail = '',
+  password = ''
 }) {
   const [api, setApi] = useState(null);
   const [isVideoEnabled, setIsVideoEnabled] = useState(true);
@@ -126,6 +127,10 @@ function useConference({
         }
       })
     );
+  };
+
+  const setPassword = newPassword => {
+    api.executeCommand('password', newPassword);
   };
 
   const toggleAudio = () => {
@@ -193,8 +198,10 @@ function useConference({
         participantJoined: ({ id, displayName }) => participantManagement(),
         participantLeft: ({ id }) => participantManagement(),
         participantKickedOut: ({ kicked, kicker }) => participantManagement(),
-        videoConferenceJoined: ({ roomName, id, displayName, avatarURL }) =>
-          participantManagement()
+        videoConferenceJoined: ({ roomName, id, displayName, avatarURL }) => {
+          setPassword(password);
+          participantManagement();
+        }
       });
 
       getMicrophones();
@@ -204,6 +211,7 @@ function useConference({
   }, [api]);
 
   return {
+    setPassword,
     isVideoEnabled,
     isAudioEnabled,
     isChatEnabled,

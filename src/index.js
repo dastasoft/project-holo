@@ -7,12 +7,20 @@ import './index.scss';
 
 const App = () => {
   const [roomName, setRoomName] = useState(null);
+  const [roomPassword, setRoomPassword] = useState('');
   const [participantCount, setParticipantCount] = useState(0);
 
   return (
     <>
       <GlobalContext.Provider
-        value={{ roomName, setRoomName, participantCount, setParticipantCount }}
+        value={{
+          roomName,
+          setRoomName,
+          participantCount,
+          setParticipantCount,
+          roomPassword,
+          setRoomPassword
+        }}
       >
         <Routes />
       </GlobalContext.Provider>

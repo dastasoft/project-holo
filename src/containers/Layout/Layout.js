@@ -9,6 +9,7 @@ const Layout = ({ history }) => {
   const { setRoomName } = useContext(GlobalContext);
   const validateUrl = history.location.pathname.match('/(.*)');
   if (validateUrl) setRoomName(validateUrl[1]);
+
   return (
     <div className="call-layout">
       <Header className="header" />

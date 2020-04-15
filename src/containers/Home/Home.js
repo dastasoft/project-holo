@@ -8,16 +8,29 @@ import { generateName } from '../../utils/randomName';
 import { GlobalContext } from '../../context/globalContext';
 
 const Home = ({ history }) => {
-  const [inputText, setInputText] = useState('');
-  const { setRoomName } = useContext(GlobalContext);
+  const [userRoomName, setUserRoomName] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const { setRoomName, setRoomPassword } = useContext(GlobalContext);
 
-  const inputChangeHandler = ev => setInputText(ev.target.value);
+  const onUserRoomNameHandler = ev => setUserRoomName(ev.target.value);
+  const onPasswordHandler = ev => setUserPassword(ev.target.value);
 
-  const onSubmitHandler = ev => {
+  const onCreateHandler = ev => {
     ev.preventDefault();
-    if (inputText.length > 0) {
-      const roomName = `${inputText}-${generateName()}`;
+    if (userRoomName.length > 0) {
+      const roomName = `${userRoomName}-${generateName()}`;
       setRoomName(roomName);
+      setRoomPassword(userPassword);
+      history.push(`/${roomName}`);
+    }
+  };
+
+  const onJoinHandler = ev => {
+    ev.preventDefault();
+    if (userRoomName.length > 0) {
+      const roomName = `${userRoomName}`;
+      setRoomName(roomName);
+      setRoomPassword(userPassword);
       history.push(`/${roomName}`);
     }
   };
@@ -25,16 +38,22 @@ const Home = ({ history }) => {
   return (
     <HomeLayout>
       <img src={logo} alt="Logo GrowMeeting" />
-      <form onSubmit={onSubmitHandler}>
-        <Input
-          type="text"
-          placeholder="Join or Create Room"
-          value={inputText}
-          onChange={inputChangeHandler}
-          autoFocus
-        />
-        <Button>SEND</Button>
-      </form>
+      <Input
+        type="text"
+        placeholder="Room Name"
+        value={userRoomName}
+        onChange={onUserRoomNameHandler}
+      />
+      <Input
+        type="password"
+        placeholder="Password (Optional)"
+        value={userPassword}
+        onChange={onPasswordHandler}
+      />
+      <Actions>
+        <Button onClick={onCreateHandler}>CREATE NEW ROOM</Button>
+        <Button onClick={onJoinHandler}>JOIN EXISTENT ROOM</Button>
+      </Actions>
     </HomeLayout>
   );
 };
@@ -56,6 +75,14 @@ const HomeLayout = styled.div`
   input {
     text-align: center;
     font-size: 25px;
+  }
+`;
+
+const Actions = styled.div`
+  display: flex;
+
+  > *:first-of-type {
+    margin-right: 21px;
   }
 `;
 

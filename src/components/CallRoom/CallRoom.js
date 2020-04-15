@@ -7,9 +7,12 @@ import CallButton from '../CallButton';
 import { GlobalContext } from '../../context/globalContext';
 
 const CallRoom = ({ className, history }) => {
-  const { roomName, setParticipantCount } = useContext(GlobalContext);
+  const { roomName, roomPassword, setParticipantCount } = useContext(
+    GlobalContext
+  );
 
   const {
+    setPassword,
     isVideoEnabled,
     isAudioEnabled,
     startRoom,
@@ -29,7 +32,8 @@ const CallRoom = ({ className, history }) => {
     participantNumber
   } = useConference({
     roomDOM: '#chatRoom',
-    roomName
+    roomName,
+    password: roomPassword
   });
 
   useEffect(() => {
@@ -43,7 +47,7 @@ const CallRoom = ({ className, history }) => {
   return (
     <ChatRoom className={className}>
       <div className="chat-visor" id="chatRoom" />
-      <div className="chat-buttons" style={{ display: 'none' }}>
+      <div className="chat-buttons">
         <CallButton
           onClickHandler={toggleShareScreen}
           iconClassName="fa fa-user-plus"
@@ -66,7 +70,7 @@ const CallRoom = ({ className, history }) => {
           iconClassName="fa fa-phone-slash"
         />
       </div>
-      <div style={{ display: 'none' }}>
+      <div>
         <select id="audioInput" name="audioInput" onClick={getMicrophones}>
           {audioInputs.map(({ deviceId, label }) => (
             <option value={deviceId}>{label}</option>
