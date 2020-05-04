@@ -5,21 +5,14 @@ function useActionSocket(actions) {
   const [socket, setSocket] = useState();
 
   useEffect(() => {
-    console.log('[socket established]');
     setSocket(socketIOClient(process.env.WEBSOCKET));
   }, []);
 
   useEffect(() => {
-    if (socket) {
-      socket.on('action', data => {
-        console.log('[action]', data.action);
-        actions[data.action]();
-      });
-    }
+    if (socket) socket.on('action', data => actions[data.action](data.value));
   }, [socket]);
 
   const broadcastRoomJoin = roomName => {
-    console.log('[joining room]', roomName);
     if (socket) socket.emit('join', roomName);
   };
 

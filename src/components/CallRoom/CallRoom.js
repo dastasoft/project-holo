@@ -93,6 +93,26 @@ const CallRoom = ({ className, history }) => {
           }
           iconClassName="fas fa-gift"
         />
+        <CallButton
+          onClickHandler={() =>
+            socket.emit('action', {
+              room: roomName,
+              action: 'playSample',
+              value: 'coffinDance'
+            })
+          }
+          iconClassName="fab fa-napster"
+        />
+        <CallButton
+          onClickHandler={() =>
+            socket.emit('action', {
+              room: roomName,
+              action: 'playSample',
+              value: 'jokeDrumEffect'
+            })
+          }
+          iconClassName="fas fa-drum"
+        />
       </div>
       <div style={{ display: 'none' }}>
         <select id="audioInput" name="audioInput" onClick={getAudioInputs}>

@@ -4,6 +4,8 @@ import { render } from 'react-dom';
 import Routes from './routes/routes';
 import { GlobalContext } from './context/globalContext';
 import useActionSocket from './hook/useActionSocket';
+import useSamplers from './hook/useSamplers';
+
 import './index.scss';
 
 const App = () => {
@@ -12,8 +14,10 @@ const App = () => {
   const [participantCount, setParticipantCount] = useState(0);
   const [party, setParty] = useState(false);
 
+  const { playSample } = useSamplers();
   const { socket, broadcastRoomJoin } = useActionSocket({
-    confetti: () => setParty(true)
+    confetti: () => setParty(true),
+    playSample: sample => playSample(sample)
   });
 
   return (
