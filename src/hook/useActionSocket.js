@@ -5,6 +5,7 @@ function useActionSocket(actions) {
   const [socket, setSocket] = useState();
 
   useEffect(() => {
+    console.log('[socket established]');
     setSocket(socketIOClient(process.env.WEBSOCKET));
   }, []);
 
@@ -19,7 +20,7 @@ function useActionSocket(actions) {
 
   const broadcastRoomJoin = roomName => {
     console.log('[joining room]', roomName);
-    socket.on('connect', () => socket.emit('join', roomName));
+    if (socket) socket.emit('join', roomName);
   };
 
   return { socket, broadcastRoomJoin };
