@@ -25,12 +25,12 @@ const App = () => {
       console.log('App -> socket', socket);
       if (socket && roomName) {
         socket.on('action', data => {
-          if (data.action == 'confetti') {
+          if (data.action === 'confetti') {
             console.log('[confetti]');
             setParty(true);
-          } else if (data.action == 'sound') {
+          } else if (data.action === 'sound') {
             console.log('[sound]');
-            sound.play();
+            //sound.play();
           }
         });
         socket.on('connect', function() {
