@@ -5,8 +5,8 @@
   "license": "MIT",
   "author": "dastasoft",
   "scripts": {
-    "start": "parcel --https src/index.html",
-    "build": "parcel build src/index.html"
+    "start": "parcel --https public/index.html",
+    "build": "parcel build public/index.html"
   },
   "dependencies": {
     "axios": "^0.19.2",
