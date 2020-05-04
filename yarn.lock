@@ -5281,7 +5281,7 @@ react-confetti@^5.0.1:
   dependencies:
     tween-functions "^1.2.0"
 
-react-dom@^16.13.0:
+react-dom@^16.8.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
   integrity sha512-81PIMmVLnCNLO/fFOQxdQkvEq/+Hfpv24XNJfpyZhTRfO0QcmQIF/PgCa1zCOj2w1hrn12MFLyaJ/G0+Mxtfag==
@@ -5325,10 +5325,10 @@ react-router@5.1.2:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-use@^14.1.1:
-  version "14.1.1"
-  resolved "https://registry.yarnpkg.com/react-use/-/react-use-14.1.1.tgz#f6ba8a861ba76a3aba0684609e27eb633c7d858f"
-  integrity sha512-3BVJJg+OrbgWG3aiyVhCgJuhx91T7juIr75QvFlMS+pesRZUd+PQNqoDhI+9pXwrc9FjCptvTHzl/YFpul3HHA==
+react-use@^14.2.0:
+  version "14.2.0"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-14.2.0.tgz#abac033fae5e358599b7e38084ff11b02e5d4868"
+  integrity sha512-vwC7jsBsiDENLrXGPqIH3W4mMS2j24h5jp4ol3jiiUQzZhCaG+ihumrShJxBI59hXso1pLHAePRQAg/fJjDcaQ==
   dependencies:
     "@types/js-cookie" "2.2.6"
     "@xobotyi/scrollbar-width" "1.9.5"
@@ -5344,7 +5344,7 @@ react-use@^14.1.1:
     ts-easing "^0.2.0"
     tslib "^1.10.0"
 
-react@>=15:
+react@^16.3.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==

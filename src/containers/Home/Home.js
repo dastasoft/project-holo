@@ -18,7 +18,7 @@ const Home = ({ history }) => {
   const onCreateHandler = ev => {
     ev.preventDefault();
     if (userRoomName.length > 0) {
-      const roomName = `${userRoomName}-${generateName()}`;
+      const roomName = userRoomName;
       setRoomName(roomName);
       setRoomPassword(userPassword);
       history.push(`/${roomName}`);

@@ -7,9 +7,13 @@ import CallButton from '../CallButton';
 import { GlobalContext } from '../../context/globalContext';
 
 const CallRoom = ({ className, history }) => {
-  const { roomName, roomPassword, setParticipantCount, setParty } = useContext(
-    GlobalContext
-  );
+  const {
+    roomName,
+    roomPassword,
+    setParticipantCount,
+    setParty,
+    socket
+  } = useContext(GlobalContext);
 
   const {
     isVideoEnabled,
@@ -81,7 +85,9 @@ const CallRoom = ({ className, history }) => {
           iconClassName="fa fa-window-maximize"
         />
         <CallButton
-          onClickHandler={() => setParty(true)}
+          onClickHandler={() =>
+            socket.emit('action', { roomName, action: 'confetti' })
+          }
           iconClassName="fas fa-gift"
         />
       </div>

@@ -11,11 +11,11 @@
   "dependencies": {
     "axios": "^0.19.2",
     "prop-types": "^15.7.2",
-    "react": ">=15",
+    "react": "^16.3.0",
     "react-confetti": "^5.0.1",
-    "react-dom": "^16.13.0",
+    "react-dom": "^16.8.0",
     "react-router-dom": "^5.1.2",
-    "react-use": "^14.1.1",
+    "react-use": "^14.2.0",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
