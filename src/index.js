@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { render } from 'react-dom';
+import socketIOClient from 'socket.io-client';
 
 import Routes from './routes/routes';
 import { GlobalContext } from './context/globalContext';
