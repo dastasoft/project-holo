@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
-import socketIOClient from 'socket.io-client';
 
 import Routes from './routes/routes';
 import { GlobalContext } from './context/globalContext';
+import useActionSocket from './hook/useActionSocket';
 import './index.scss';
 
 const App = () => {
@@ -12,37 +12,9 @@ const App = () => {
   const [participantCount, setParticipantCount] = useState(0);
   const [party, setParty] = useState(false);
 
-  const useActionSocket = roomName => {
-    const ENDPOINT = 'http://grow-meeting-websocket.herokuapp.com';
-
-    const [socket, setSocket] = useState(null);
-
-    useEffect(() => {
-      setSocket(socketIOClient(ENDPOINT));
-    }, []);
-
-    useEffect(() => {
-      console.log('App -> socket', socket);
-      if (socket && roomName) {
-        socket.on('action', data => {
-          if (data.action === 'confetti') {
-            console.log('[confetti]');
-            setParty(true);
-          } else if (data.action === 'sound') {
-            console.log('[sound]');
-            //sound.play();
-          }
-        });
-        socket.on('connect', function() {
-          socket.emit('join', roomName);
-        });
-      }
-    }, [socket, roomName]);
-
-    return socket;
-  };
-
-  const socket = useActionSocket(roomName);
+  const { socket, broadcastRoomJoin } = useActionSocket({
+    confetti: () => setParty(true)
+  });
 
   return (
     <>
@@ -56,7 +28,8 @@ const App = () => {
           setRoomPassword,
           party,
           setParty,
-          socket
+          socket,
+          broadcastRoomJoin
         }}
       >
         <Routes />

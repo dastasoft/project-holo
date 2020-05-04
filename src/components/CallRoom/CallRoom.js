@@ -11,8 +11,8 @@ const CallRoom = ({ className, history }) => {
     roomName,
     roomPassword,
     setParticipantCount,
-    setParty,
-    socket
+    socket,
+    broadcastRoomJoin
   } = useContext(GlobalContext);
 
   const {
@@ -46,7 +46,10 @@ const CallRoom = ({ className, history }) => {
   });
 
   useEffect(() => {
-    if (roomName) startRoom();
+    if (roomName) {
+      broadcastRoomJoin(roomName);
+      startRoom();
+    }
   }, [roomName]);
 
   useEffect(() => {
@@ -86,7 +89,7 @@ const CallRoom = ({ className, history }) => {
         />
         <CallButton
           onClickHandler={() =>
-            socket.emit('action', { roomName, action: 'confetti' })
+            socket.emit('action', { room: roomName, action: 'confetti' })
           }
           iconClassName="fas fa-gift"
         />
