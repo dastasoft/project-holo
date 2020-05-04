@@ -13,7 +13,7 @@ function useActionSocket(actions) {
   }, [socket]);
 
   const broadcastRoomJoin = roomName => {
-    if (socket) socket.emit('join', roomName);
+    if (socket && roomName) socket.emit('join', roomName.toLowerCase());
   };
 
   return { socket, broadcastRoomJoin };
