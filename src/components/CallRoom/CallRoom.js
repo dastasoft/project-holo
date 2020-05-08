@@ -49,7 +49,7 @@ const CallRoom = ({ className, history }) => {
   useEffect(() => {
     if (roomName) {
       broadcastRoomJoin(roomName);
-      //startRoom();
+      startRoom();
     }
   }, [roomName]);
 
