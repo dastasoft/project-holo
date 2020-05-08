@@ -94,7 +94,7 @@ const CallRoom = ({ className, history }) => {
             }
             iconClassName="fas fa-gift"
             tooltip={
-              <div style={{ backgroundColor: 'black', borderRadius: '4px' }}>
+              <div>
                 <CallButton
                   onClickHandler={() =>
                     socket.emit('action', {

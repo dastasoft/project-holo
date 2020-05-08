@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { bool, string, func, node } from 'prop-types';
 import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+
 const CallButtonBase = ({
   className,
   onClickHandler,
@@ -10,28 +12,17 @@ const CallButtonBase = ({
   customAlt,
   tooltip
 }) => {
-  const [tootipVisible, setTooltipVisible] = useState(false);
-  const onHover = () => setTooltipVisible(true);
-  const onBlur = () => setTooltipVisible(false);
   return (
     <div>
-      <button
-        type="button"
-        className={className}
-        onClick={onClickHandler}
-        onMouseOver={onHover}
-        onFocus={onHover}
-        onMouseLeave={onBlur}
-      >
-        {isCustom ? (
-          <img src={customImg} alt={customAlt} />
-        ) : (
-          <i className={iconClassName} />
-        )}
-      </button>
-      <div style={{ position: 'absolute', bottom: '60px' }}>
-        {tootipVisible && tooltip}
-      </div>
+      <Tippy content={tooltip} arrow animation="scale" duration={10}>
+        <button type="button" className={className} onClick={onClickHandler}>
+          {isCustom ? (
+            <img src={customImg} alt={customAlt} />
+          ) : (
+            <i className={iconClassName} />
+          )}
+        </button>
+      </Tippy>
     </div>
   );
 };
