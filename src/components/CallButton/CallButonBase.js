@@ -9,20 +9,17 @@ const CallButtonBase = ({
   iconClassName,
   isCustom,
   customImg,
-  customAlt,
-  tooltip
+  customAlt
 }) => {
   return (
     <div>
-      <Tippy content={tooltip} arrow animation="scale" duration={10}>
-        <button type="button" className={className} onClick={onClickHandler}>
-          {isCustom ? (
-            <img src={customImg} alt={customAlt} />
-          ) : (
-            <i className={iconClassName} />
-          )}
-        </button>
-      </Tippy>
+      <button type="button" className={className} onClick={onClickHandler}>
+        {isCustom ? (
+          <img src={customImg} alt={customAlt} />
+        ) : (
+          <i className={iconClassName} />
+        )}
+      </button>
     </div>
   );
 };

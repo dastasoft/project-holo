@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import useConference from '../../hook/useConference';
 import CallButton from '../CallButton';
+import MenuButton from '../MenuButton';
 import { GlobalContext } from '../../context/globalContext';
 
 const CallRoom = ({ className, history }) => {
@@ -88,11 +89,30 @@ const CallRoom = ({ className, history }) => {
             onClickHandler={onFullScreen}
             iconClassName="fa fa-window-maximize"
           />
-          <CallButton
+          <MenuButton
             onClickHandler={() =>
               socket.emit('action', { room: roomName, action: 'confetti' })
             }
-            iconClassName="fas fa-gift"
+            iconClassName="fas fa-hat-wizard"
+            tooltip={
+              <div>
+                <CallButton
+                  onClickHandler={() =>
+                    socket.emit('action', {
+                      room: roomName,
+                      action: 'confetti'
+                    })
+                  }
+                  iconClassName="fas fa-gift"
+                />
+              </div>
+            }
+          />
+          <MenuButton
+            onClickHandler={() =>
+              socket.emit('action', { room: roomName, action: 'confetti' })
+            }
+            iconClassName="fas fa-music"
             tooltip={
               <div>
                 <CallButton
