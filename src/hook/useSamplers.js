@@ -10,7 +10,7 @@ function useSamplers() {
   const defaultHowlConfig = {
     autoplay: false,
     loop: false,
-    volume: 0.5
+    volume: 0.2
   };
 
   const getSample = action => {
