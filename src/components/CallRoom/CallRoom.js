@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 
 import useConference from '../../hook/useConference';
@@ -48,7 +48,7 @@ const CallRoom = ({ className, history }) => {
   useEffect(() => {
     if (roomName) {
       broadcastRoomJoin(roomName);
-      startRoom();
+      //startRoom();
     }
   }, [roomName]);
 
@@ -57,89 +57,95 @@ const CallRoom = ({ className, history }) => {
   }, [participantNumber]);
 
   return (
-    <ChatRoom className={className}>
-      <div className="chat-visor" id="chatRoom" />
-      <div className="chat-buttons">
-        <CallButton
-          className={isScreenShareEnabled ? 'active' : ''}
-          onClickHandler={toggleShareScreen}
-          iconClassName="fa fa-tv"
-        />
-        <CallButton
-          onClickHandler={toggleAudio}
-          iconClassName={`fa fa-microphone${isAudioEnabled ? '' : '-slash'}`}
-        />
-        <CallButton
-          onClickHandler={toggleVideo}
-          iconClassName={`fa fa-video${isVideoEnabled ? '' : '-slash'}`}
-        />
-        <CallButton
-          className="exit"
-          onClickHandler={() => history.push('')}
-          iconClassName="fa fa-phone-slash"
-        />
-        <CallButton
-          className={isTileViewEnabled ? 'active' : ''}
-          onClickHandler={toggleMosaic}
-          iconClassName="fas fa-border-all"
-        />
-        <CallButton
-          onClickHandler={onFullScreen}
-          iconClassName="fa fa-window-maximize"
-        />
-        <CallButton
-          onClickHandler={() =>
-            socket.emit('action', { room: roomName, action: 'confetti' })
-          }
-          iconClassName="fas fa-gift"
-        />
-        <CallButton
-          onClickHandler={() =>
-            socket.emit('action', {
-              room: roomName,
-              action: 'playSample',
-              value: 'coffinDance'
-            })
-          }
-          iconClassName="fab fa-napster"
-        />
-        <CallButton
-          onClickHandler={() =>
-            socket.emit('action', {
-              room: roomName,
-              action: 'playSample',
-              value: 'jokeDrumEffect'
-            })
-          }
-          iconClassName="fas fa-drum"
-        />
-      </div>
-      <div style={{ display: 'none' }}>
-        <select id="audioInput" name="audioInput" onClick={getAudioInputs}>
-          {audioInputList.map(({ deviceId, label }) => (
-            <option key={deviceId} value={deviceId}>
-              {label}
-            </option>
-          ))}
-        </select>
+    <>
+      <ChatRoom className={className}>
+        <div className="chat-visor" id="chatRoom" />
+        <div className="chat-buttons">
+          <CallButton
+            className={isScreenShareEnabled ? 'active' : ''}
+            onClickHandler={toggleShareScreen}
+            iconClassName="fa fa-tv"
+          />
+          <CallButton
+            onClickHandler={toggleAudio}
+            iconClassName={`fa fa-microphone${isAudioEnabled ? '' : '-slash'}`}
+          />
+          <CallButton
+            onClickHandler={toggleVideo}
+            iconClassName={`fa fa-video${isVideoEnabled ? '' : '-slash'}`}
+          />
+          <CallButton
+            className="exit"
+            onClickHandler={() => history.push('')}
+            iconClassName="fa fa-phone-slash"
+          />
+          <CallButton
+            className={isTileViewEnabled ? 'active' : ''}
+            onClickHandler={toggleMosaic}
+            iconClassName="fas fa-border-all"
+          />
+          <CallButton
+            onClickHandler={onFullScreen}
+            iconClassName="fa fa-window-maximize"
+          />
+          <CallButton
+            onClickHandler={() =>
+              socket.emit('action', { room: roomName, action: 'confetti' })
+            }
+            iconClassName="fas fa-gift"
+            tooltip={
+              <div style={{ backgroundColor: 'black', borderRadius: '4px' }}>
+                <CallButton
+                  onClickHandler={() =>
+                    socket.emit('action', {
+                      room: roomName,
+                      action: 'playSample',
+                      value: 'coffinDance'
+                    })
+                  }
+                  iconClassName="fab fa-napster"
+                />
+                <CallButton
+                  onClickHandler={() =>
+                    socket.emit('action', {
+                      room: roomName,
+                      action: 'playSample',
+                      value: 'jokeDrumEffect'
+                    })
+                  }
+                  iconClassName="fas fa-drum"
+                />
+              </div>
+            }
+          />
+        </div>
+        <div style={{ display: 'none' }}>
+          <select id="audioInput" name="audioInput" onClick={getAudioInputs}>
+            {audioInputList.map(({ deviceId, label }) => (
+              <option key={deviceId} value={deviceId}>
+                {label}
+              </option>
+            ))}
+          </select>
 
-        <select id="audioOutput" name="audioOutput" onClick={getAudioOutputs}>
-          {audioOutputList.map(({ deviceId, label }) => (
-            <option key={deviceId} value={deviceId}>
-              {label}
-            </option>
-          ))}
-        </select>
+          <select id="audioOutput" name="audioOutput" onClick={getAudioOutputs}>
+            {audioOutputList.map(({ deviceId, label }) => (
+              <option key={deviceId} value={deviceId}>
+                {label}
+              </option>
+            ))}
+          </select>
 
-        <select id="videoInput" name="videoInput" onClick={getVideoInputs}>
-          {videoInputList.map(({ deviceId, label }) => (
-            <option key={deviceId} value={deviceId}>
-              {label}
-            </option>
-          ))}
-        </select>
-      </div>
-    </ChatRoom>
+          <select id="videoInput" name="videoInput" onClick={getVideoInputs}>
+            {videoInputList.map(({ deviceId, label }) => (
+              <option key={deviceId} value={deviceId}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </div>
+      </ChatRoom>
+    </>
   );
 };
 
