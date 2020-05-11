@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Howl } from 'howler';
 
+import anysAnys from '../assets/sounds/anys_anys.m4a';
 import coffinDance from '../assets/sounds/coffin_dance.mp3';
 import doorKnock from '../assets/sounds/door_knock.mp3';
 import epicSaxGuy from '../assets/sounds/epic_sax_guy.mp3';
@@ -19,6 +20,8 @@ function useSamplers() {
 
   const getSample = action => {
     switch (action) {
+      case 'anysAnys':
+        return anysAnys;
       case 'coffinDance':
         return coffinDance;
       case 'doorKnock':

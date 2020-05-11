@@ -122,6 +122,7 @@ const CallRoom = ({ className, history }) => {
             tooltip={
               <TooltipContet>
                 {[
+                  { name: 'anysAnys', icon: 'fas fa-birthday-cake' },
                   { name: 'coffinDance', icon: 'fab fa-napster' },
                   { name: 'doorKnock', icon: 'fas fa-dungeon' },
                   { name: 'epicSaxGuy', icon: 'fas fa-pepper-hot' },
@@ -206,6 +207,7 @@ const ChatRoom = styled.div`
 
 const TooltipContet = styled.div`
   display: flex;
+  flex-wrap: wrap;
   > * {
     margin: 4px;
   }
