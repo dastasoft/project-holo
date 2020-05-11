@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useContext, useState, useRef } from 'react';
+import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 import useConference from '../../hook/useConference';
@@ -90,12 +90,9 @@ const CallRoom = ({ className, history }) => {
             iconClassName="fa fa-window-maximize"
           />
           <MenuButton
-            onClickHandler={() =>
-              socket.emit('action', { room: roomName, action: 'confetti' })
-            }
             iconClassName="fas fa-hat-wizard"
             tooltip={
-              <div>
+              <TooltipContet>
                 <CallButton
                   onClickHandler={() =>
                     socket.emit('action', {
@@ -105,7 +102,16 @@ const CallRoom = ({ className, history }) => {
                   }
                   iconClassName="fas fa-gift"
                 />
-              </div>
+                <CallButton
+                  onClickHandler={() =>
+                    socket.emit('action', {
+                      room: roomName,
+                      action: 'fireworks'
+                    })
+                  }
+                  iconClassName="fas fa-fire"
+                />
+              </TooltipContet>
             }
           />
           <MenuButton
@@ -114,28 +120,30 @@ const CallRoom = ({ className, history }) => {
             }
             iconClassName="fas fa-music"
             tooltip={
-              <div>
-                <CallButton
-                  onClickHandler={() =>
-                    socket.emit('action', {
-                      room: roomName,
-                      action: 'playSample',
-                      value: 'coffinDance'
-                    })
-                  }
-                  iconClassName="fab fa-napster"
-                />
-                <CallButton
-                  onClickHandler={() =>
-                    socket.emit('action', {
-                      room: roomName,
-                      action: 'playSample',
-                      value: 'jokeDrumEffect'
-                    })
-                  }
-                  iconClassName="fas fa-drum"
-                />
-              </div>
+              <TooltipContet>
+                {[
+                  { name: 'coffinDance', icon: 'fab fa-napster' },
+                  { name: 'doorKnock', icon: 'fas fa-dungeon' },
+                  { name: 'epicSaxGuy', icon: 'fas fa-pepper-hot' },
+                  { name: 'jokeDrumEffect', icon: 'fas fa-drum' },
+                  {
+                    name: 'ohYeah',
+                    icon: 'fas fa-american-sign-language-interpreting'
+                  },
+                  { name: 'surpriseMotherfucker', icon: 'fas fa-surprise' }
+                ].map(sample => (
+                  <CallButton
+                    onClickHandler={() =>
+                      socket.emit('action', {
+                        room: roomName,
+                        action: 'playSample',
+                        value: sample.name
+                      })
+                    }
+                    iconClassName={sample.icon}
+                  />
+                ))}
+              </TooltipContet>
             }
           />
         </div>
@@ -196,19 +204,10 @@ const ChatRoom = styled.div`
   }
 `;
 
-const Button = styled.button`
-  width: 48px;
-  height: 48px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  border-radius: 24px;
-  &.exit {
-    color: red;
-    font-size: 26px;
-  }
+const TooltipContet = styled.div`
+  display: flex;
+  > * {
+    margin: 4px;
   }
 `;
 
