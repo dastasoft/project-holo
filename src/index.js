@@ -13,10 +13,12 @@ const App = () => {
   const [roomPassword, setRoomPassword] = useState('');
   const [participantCount, setParticipantCount] = useState(0);
   const [party, setParty] = useState(false);
+  const [fireworks, setFireworks] = useState(false);
 
   const { playSample } = useSamplers();
   const { socket, broadcastRoomJoin } = useActionSocket({
     confetti: () => setParty(true),
+    fireworks: () => setFireworks(true),
     playSample: sample => playSample(sample)
   });
 
@@ -32,6 +34,8 @@ const App = () => {
           setRoomPassword,
           party,
           setParty,
+          fireworks,
+          setFireworks,
           socket,
           broadcastRoomJoin
         }}
