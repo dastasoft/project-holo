@@ -6,7 +6,7 @@ import { GlobalContext } from './context/globalContext';
 import useActionSocket from './hook/useActionSocket';
 import useSamplers from './hook/useSamplers';
 
-import './index.scss';
+import './styles/app.css';
 
 const App = () => {
   const [roomName, setRoomName] = useState(null);
