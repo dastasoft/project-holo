@@ -95,6 +95,7 @@ function useConference({
   const [isScreenShareEnabled, setIsScreenShareEnabled] = useState(false);
   const [isTileViewEnabled, setIsTileViewEnabled] = useState(false);
   const [participantNumber, setParticipantNumber] = useState(0);
+  const [participantId, setParticipantId] = useState('');
   const [audioInputList, setAudioInputList] = useState([]);
   const [audioOutputList, setAudioOutputList] = useState([]);
   const [videoInputList, setVideoInputList] = useState([]);
@@ -152,9 +153,10 @@ function useConference({
     api.executeCommand('hangup');
   };
 
-  const participantManagement = () => {
+  const participantManagement = id => {
     const num = api.getNumberOfParticipants();
     setParticipantNumber(num > 0 ? num : 0);
+    if (id) setParticipantId(id);
   };
 
   const audioMuteChangeHandler = muted => setIsAudioEnabled(!muted);
@@ -211,7 +213,7 @@ function useConference({
         participantKickedOut: ({ kicked, kicker }) => participantManagement(),
         videoConferenceJoined: ({ roomName, id, displayName, avatarURL }) => {
           setPassword(password);
-          participantManagement();
+          participantManagement(id);
         },
         audioMuteStatusChanged: ({ muted }) => audioMuteChangeHandler(muted),
         videoMuteStatusChanged: ({ muted }) => videoMuteChangeHandler(muted),
@@ -232,6 +234,7 @@ function useConference({
     isScreenShareEnabled,
     isTileViewEnabled,
     participantNumber,
+    participantId,
     audioInputList,
     audioOutputList,
     videoInputList,

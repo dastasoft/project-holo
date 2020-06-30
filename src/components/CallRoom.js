@@ -11,6 +11,7 @@ const CallRoom = ({ history }) => {
     roomName,
     roomPassword,
     setParticipantCount,
+    setParticipantId,
     socket,
     broadcastRoomJoin
   } = useContext(GlobalContext);
@@ -22,6 +23,7 @@ const CallRoom = ({ history }) => {
     isScreenShareEnabled,
     isTileViewEnabled,
     participantNumber,
+    participantId,
     audioInputList,
     audioOutputList,
     videoInputList,
@@ -55,6 +57,14 @@ const CallRoom = ({ history }) => {
   useEffect(() => {
     setParticipantCount(participantNumber);
   }, [participantNumber]);
+
+  useEffect(() => {
+    console.log('CallRoom -> participantId: ', participantId);
+    if (participantId) {
+      console.log('CallRoom -> participantId despues del if', participantId);
+      setParticipantId(participantId);
+    }
+  }, [participantId]);
 
   const callButtonsStyle = 'my-2 mx-2';
 
@@ -153,6 +163,17 @@ const CallRoom = ({ history }) => {
               ))}
             </div>
           }
+        />
+        <CallButton
+          className={callButtonsStyle}
+          onClickHandler={() =>
+            socket.emit('action', {
+              room: roomName,
+              action: 'buzz',
+              value: participantId
+            })
+          }
+          iconClassName="fas fa-bullhorn"
         />
       </div>
       <div style={{ display: 'none' }}>
