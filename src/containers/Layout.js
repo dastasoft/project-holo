@@ -14,7 +14,7 @@ const Layout = ({ history }) => {
   if (validateUrl) setRoomName(validateUrl[1]);
 
   return (
-    <div className="w-screen h-screen flex flex-col">
+    <div className="w-screen h-screen max-h-full max-w-full flex flex-col">
       <Header />
       <CallRoom history={history} />
       <SizedConfetti

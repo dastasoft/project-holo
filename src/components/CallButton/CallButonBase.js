@@ -1,7 +1,5 @@
 import React from 'react';
 import { bool, string, func, node } from 'prop-types';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
 
 const CallButtonBase = ({
   className,

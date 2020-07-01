@@ -36,7 +36,7 @@ const interfaceConfig = {
   LIVE_STREAMING_HELP_LINK: 'https://jitsi.org/live',
   LOCAL_THUMBNAIL_RATIO: 16 / 9,
   MAXIMUM_ZOOMING_COEFFICIENT: 1.3,
-  MOBILE_APP_PROMO: true,
+  MOBILE_APP_PROMO: false,
   NATIVE_APP_NAME: 'Grow Meeting',
   OPTIMAL_BROWSERS: ['chrome', 'chromium', 'firefox', 'electron'],
   POLICY_LOGO: null,
@@ -58,7 +58,7 @@ const interfaceConfig = {
   UNSUPPORTED_BROWSERS: [],
   VERTICAL_FILMSTRIP: true,
   VIDEO_LAYOUT_FIT: 'both',
-  VIDEO_QUALITY_LABEL_DISABLED: false,
+  VIDEO_QUALITY_LABEL_DISABLED: false
   /**
    * Specify custom URL for downloading android mobile app.
    */
@@ -78,7 +78,6 @@ const interfaceConfig = {
    * Specify the Android app package name.
    */
   // ANDROID_APP_PACKAGE: 'org.jitsi.meet',
-  makeJsonParserHappy: 'even if last key had a trailing comma'
 };
 
 function useConference({
@@ -110,6 +109,10 @@ function useConference({
         interfaceConfigOverwrite: interfaceConfig,
         userInfo: {
           email: adminEmail
+        },
+        onload: event => {
+          console.log(event);
+          console.log(event.target);
         }
       })
     );
