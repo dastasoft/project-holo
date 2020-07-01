@@ -133,7 +133,7 @@ const CallRoom = ({ history }) => {
           }
         />
         <MenuButton
-          className={`${callButtonsStyle} mr-0`}
+          className={callButtonsStyle}
           iconClassName="fas fa-music"
           tooltip={
             <div className="flex flex-wrap">
@@ -165,7 +165,7 @@ const CallRoom = ({ history }) => {
           }
         />
         <CallButton
-          className={callButtonsStyle}
+          className={`${callButtonsStyle} mr-0`}
           onClickHandler={() =>
             socket.emit('action', {
               room: roomName,
