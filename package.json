@@ -11,14 +11,15 @@
     "build:react": "cross-env NODE_ENV=production yarn run build:css && parcel build app/public/index.html",
     "clean": "rimraf .cache dist build",
     "serve:electron": "wait-on http://localhost:1234 && electron .",
-    "serve:react": "cross-env BROWSER=none yarn run watch:css && parcel serve -p 1234 app/public/index.html",
-    "start": "concurrently yarn:serve:react yarn:serve:electron",
+    "serve:react": "cross-env BROWSER=none yarn run watch:css && env WEBSOCKET=https://grow-meeting-websocket.herokuapp.com parcel serve -p 1234 app/public/index.html",
+    "start": "yarn:serve:react",
+    "start-electron": "concurrently yarn:serve:react yarn:serve:electron",
     "release": "yarn clean && yarn build && yarn build:electron",
     "watch:css": "postcss app/src/styles/tailwind.css -o app/src/styles/app.css"
   },
   "build": {
-    "appId": "io.intocode.react-boilerplate",
-    "productName": "ReactBoilerplate",
+    "appId": "io.intocode.grow-meeting",
+    "productName": "GrowMeeting",
     "files": [
       "src/electron.js",
       "dist/**/*"
