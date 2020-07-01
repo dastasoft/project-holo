@@ -1,18 +1,34 @@
 {
   "name": "project-holo",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "src/electron.js",
   "license": "MIT",
   "author": "dastasoft",
   "scripts": {
-    "start": "yarn run watch:css && env WEBSOCKET=https://grow-meeting-websocket.herokuapp.com parcel --no-cache public/index.html",
-    "build": "yarn run build:css && parcel build public/index.html",
-    "build:css": "postcss src/styles/tailwind.css -o src/styles/app.css",
-    "watch:css": "postcss src/styles/tailwind.css -o src/styles/app.css"
+    "build": "yarn build:react",
+    "build:css": "postcss app/src/styles/tailwind.css -o app/src/styles/app.css",
+    "build:electron": "electron-builder build --linux",
+    "build:react": "cross-env NODE_ENV=production yarn run build:css && parcel build app/public/index.html",
+    "clean": "rimraf .cache dist build",
+    "serve:electron": "wait-on http://localhost:1234 && electron .",
+    "serve:react": "cross-env BROWSER=none yarn run watch:css && parcel serve -p 1234 app/public/index.html",
+    "start": "concurrently yarn:serve:react yarn:serve:electron",
+    "release": "yarn clean && yarn build && yarn build:electron",
+    "watch:css": "postcss app/src/styles/tailwind.css -o app/src/styles/app.css"
+  },
+  "build": {
+    "appId": "io.intocode.react-boilerplate",
+    "productName": "ReactBoilerplate",
+    "files": [
+      "src/electron.js",
+      "dist/**/*"
+    ]
   },
   "dependencies": {
     "@tippyjs/react": "^4.0.5",
     "axios": "^0.19.2",
+    "electron-debug": "^3.1.0",
+    "electron-is-dev": "^1.2.0",
     "howler": "^2.1.3",
     "prop-types": "^15.7.2",
     "react": "^16.3.0",
@@ -31,6 +47,10 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "autoprefixer": "^9.8.4",
+    "concurrently": "^5.2.0",
+    "cross-env": "^7.0.2",
+    "electron": "^9.0.5",
+    "electron-builder": "^22.7.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.10.0",
@@ -40,7 +60,9 @@
     "eslint-plugin-react": "^7.18.3",
     "parcel-bundler": "^1.12.4",
     "postcss-cli": "^7.1.1",
-    "prettier": "^1.19.1",
-    "tailwindcss": "^1.4.6"
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "tailwindcss": "^1.4.6",
+    "wait-on": "^5.0.1"
   }
 }
