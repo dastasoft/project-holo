@@ -1226,11 +1226,11 @@
     physical-cpu-count "^2.0.0"
 
 "@popperjs/core@^2.3.2":
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.4.2.tgz#7c6dc4ecef16149fd7a736710baa1b811017fdca"
-  integrity sha512-JlGTGRYHC2QK+DDbePyXdBdooxFq2+noLfWpRqJtkxcb/oYWzOF0kcbfvvbWrwevCC1l6hLUg1wHYT+ona5BWQ==
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.4.3.tgz#9b10ec423989d3a7fe46f3d8a9cafe8589ccf354"
+  integrity sha512-r0jArf9l4hXBJVgWlFiDj3rC+51G9d+AfycAp2YacHeKZnslGQblxGdRpbprZ2snXzYVjrSu0Tt0TZFQAILipg==
 
-"@tippyjs/react@^4.0.2":
+"@tippyjs/react@^4.0.5":
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/@tippyjs/react/-/react-4.0.5.tgz#804399370d929b29bb6387b7dad9452635ee4221"
   integrity sha512-Q7hv4Kkz5XlL71KP/SY8mdrfOkNkOmyQbMl2gh5fNPSzsqlPvAFbMyOP8iI0MS/sHASYGfth4+D9SzyTkrheTw==
