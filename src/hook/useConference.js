@@ -53,7 +53,7 @@ const interfaceConfig = {
   SHOW_WATERMARK_FOR_GUESTS: false,
   SUPPORT_URL: 'https://community.jitsi.org/',
   TOOLBAR_ALWAYS_VISIBLE: false,
-  TOOLBAR_BUTTONS: ['security'],
+  TOOLBAR_BUTTONS: ['security', 'chat'],
   TOOLBAR_TIMEOUT: 4000,
   UNSUPPORTED_BROWSERS: [],
   VERTICAL_FILMSTRIP: true,
@@ -90,7 +90,7 @@ function useConference({
   const [api, setApi] = useState(null);
   const [isVideoEnabled, setIsVideoEnabled] = useState(true);
   const [isAudioEnabled, setIsAudioEnabled] = useState(true);
-  const [isChatEnabled, setIsChatEnabled] = useState(false);
+  const [isChatEnabled] = useState(false);
   const [isScreenShareEnabled, setIsScreenShareEnabled] = useState(false);
   const [isTileViewEnabled, setIsTileViewEnabled] = useState(false);
   const [participantNumber, setParticipantNumber] = useState(0);
@@ -110,10 +110,6 @@ function useConference({
         interfaceConfigOverwrite: interfaceConfig,
         userInfo: {
           email: adminEmail
-        },
-        onload: event => {
-          console.log(event);
-          console.log(event.target);
         }
       })
     );
@@ -211,10 +207,10 @@ function useConference({
   useEffect(() => {
     if (api) {
       api.addEventListeners({
-        participantJoined: ({ id, displayName }) => participantManagement(),
-        participantLeft: ({ id }) => participantManagement(),
-        participantKickedOut: ({ kicked, kicker }) => participantManagement(),
-        videoConferenceJoined: ({ roomName, id, displayName, avatarURL }) => {
+        participantJoined: () => participantManagement(),
+        participantLeft: () => participantManagement(),
+        participantKickedOut: () => participantManagement(),
+        videoConferenceJoined: ({ id }) => {
           setPassword(password);
           participantManagement(id);
         },

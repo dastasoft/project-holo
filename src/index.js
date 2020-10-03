@@ -30,7 +30,7 @@ const App = () => {
               icon:
                 'https://cdn.discordapp.com/attachments/727479740050571294/727480000978223165/GrowMeetingLogo.png'
             });
-            msg.addEventListener('click', event => {});
+            msg.addEventListener('click', () => {});
           }
         });
       }

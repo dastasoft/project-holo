@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { bool, string, func, node } from 'prop-types';
 import Tippy from '@tippyjs/react';

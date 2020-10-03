@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 
 import Input from '../components/ReactJedisUI/RJInput';
@@ -7,7 +8,7 @@ import { GlobalContext } from '../context/globalContext';
 
 const Home = ({ history }) => {
   const [userRoomName, setUserRoomName] = useState('');
-  const [userPassword, setUserPassword] = useState('');
+  const [userPassword] = useState('');
   const { setRoomName, setRoomPassword } = useContext(GlobalContext);
 
   const onUserRoomNameHandler = ev => setUserRoomName(ev.target.value);

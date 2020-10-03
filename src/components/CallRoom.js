@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useContext } from 'react';
 
@@ -19,7 +20,6 @@ const CallRoom = ({ history }) => {
   const {
     isVideoEnabled,
     isAudioEnabled,
-    isChatEnabled,
     isScreenShareEnabled,
     isTileViewEnabled,
     participantNumber,
@@ -30,16 +30,11 @@ const CallRoom = ({ history }) => {
     onFullScreen,
     toggleAudio,
     toggleVideo,
-    toggleChat,
     toggleShareScreen,
     toggleMosaic,
-    hangup,
     getAudioInputs,
-    setAudioInputs,
     getAudioOutputs,
-    setAudioOutputs,
     getVideoInputs,
-    setVideoInputs,
     startRoom
   } = useConference({
     roomDOM: '#chatRoom',
@@ -59,9 +54,7 @@ const CallRoom = ({ history }) => {
   }, [participantNumber]);
 
   useEffect(() => {
-    console.log('CallRoom -> participantId: ', participantId);
     if (participantId) {
-      console.log('CallRoom -> participantId despues del if', participantId);
       setParticipantId(participantId);
     }
   }, [participantId]);
@@ -163,6 +156,16 @@ const CallRoom = ({ history }) => {
               ))}
             </div>
           }
+        />
+        <CallButton
+          className={callButtonsStyle}
+          onClickHandler={() =>
+            window.open(
+              'https://the-four-lords.github.io/congress-crush-web-v/',
+              '_blank'
+            )
+          }
+          iconClassName="fas fa-gamepad"
         />
         <CallButton
           className={`${callButtonsStyle} mr-0`}
