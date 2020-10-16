@@ -53,7 +53,7 @@ const interfaceConfig = {
   SHOW_WATERMARK_FOR_GUESTS: false,
   SUPPORT_URL: 'https://community.jitsi.org/',
   TOOLBAR_ALWAYS_VISIBLE: false,
-  TOOLBAR_BUTTONS: ['security', 'chat'],
+  TOOLBAR_BUTTONS: ['sharedvideo', 'security', 'chat', 'videobackgroundblur'],
   TOOLBAR_TIMEOUT: 4000,
   UNSUPPORTED_BROWSERS: [],
   VERTICAL_FILMSTRIP: true,
