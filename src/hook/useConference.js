@@ -1,5 +1,9 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
 import { useState, useEffect } from 'react';
+
+import downloadFile from '../utils/downloadFile';
 
 const interfaceConfig = {
   APP_NAME: 'Grow Meeting',
@@ -79,6 +83,8 @@ const interfaceConfig = {
    */
   // ANDROID_APP_PACKAGE: 'org.jitsi.meet',
 };
+
+const DELAY_TIME_TO_CAPTURE_IMAGE = 3000;
 
 function useConference({
   roomName = 'Custom Room',
@@ -197,6 +203,48 @@ function useConference({
     api.executeCommand('password', newPassword);
   };
 
+  const captureImage = (fileName = 'selfie') => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        api.captureLargeVideoScreenshot().then(data => {
+          console.warn(data.dataURL);
+          downloadFile(`${fileName}.png`, data.dataURL);
+          api.setLargeVideoParticipant(); // Return to the active participant
+          resolve();
+        });
+      }, DELAY_TIME_TO_CAPTURE_IMAGE);
+    });
+  };
+
+  const takeSelfie = async () => {
+    api.setLargeVideoParticipant(participantId);
+    await captureImage();
+  };
+
+  const chainPromises = async promises => {
+    for (const promise of promises) {
+      await promise();
+    }
+  };
+
+  const takeAllParticipantsSelfie = async () => {
+    const participants = api.getParticipantsInfo();
+
+    const tasks = participants.map(participant => {
+      return () =>
+        new Promise(resolve => {
+          console.warn('setLargeVideoParticipant', participant.displayName);
+          api.setLargeVideoParticipant(participant.participantId);
+          captureImage(participant.displayName).then(() => {
+            console.warn('finished', participant.displayName);
+            setTimeout(() => resolve(), 1000);
+          });
+        });
+    });
+
+    chainPromises(tasks).then(api.setLargeVideoParticipant());
+  };
+
   useEffect(() => {
     // It's a good practice to remove the conference before the page is unloaded.
     return () => {
@@ -250,7 +298,9 @@ function useConference({
     setAudioOutputs,
     getVideoInputs,
     setVideoInputs,
-    startRoom
+    startRoom,
+    takeSelfie,
+    takeAllParticipantsSelfie
   };
 }
 

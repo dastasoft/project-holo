@@ -35,7 +35,9 @@ const CallRoom = ({ history }) => {
     getAudioInputs,
     getAudioOutputs,
     getVideoInputs,
-    startRoom
+    startRoom,
+    takeSelfie,
+    takeAllParticipantsSelfie
   } = useConference({
     roomDOM: '#chatRoom',
     roomName,
@@ -65,6 +67,24 @@ const CallRoom = ({ history }) => {
     <div className="flex-grow flex flex-col">
       <div className="flex-grow bg-gray-300" id="chatRoom" />
       <div className="flex  flex-wrap justify-center bg-black">
+        <MenuButton
+          className={callButtonsStyle}
+          iconClassName="fas fa-camera"
+          tooltip={
+            <div className="flex flex-wrap">
+              <CallButton
+                className="m-2"
+                onClickHandler={takeSelfie}
+                iconClassName="fas fa-user"
+              />
+              <CallButton
+                className="m-2"
+                onClickHandler={takeAllParticipantsSelfie}
+                iconClassName="fas fa-users"
+              />
+            </div>
+          }
+        />
         <CallButton
           className={`${
             isScreenShareEnabled ? 'active' : ''
