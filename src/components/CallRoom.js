@@ -7,7 +7,7 @@ import CallButton from './CallButton';
 import MenuButton from './MenuButton';
 import { GlobalContext } from '../context/globalContext';
 
-const CallRoom = ({ history }) => {
+const CallRoom = ({ history, setOverlayActive }) => {
   const {
     roomName,
     roomPassword,
@@ -74,12 +74,20 @@ const CallRoom = ({ history }) => {
             <div className="flex flex-wrap">
               <CallButton
                 className="m-2"
-                onClickHandler={takeSelfie}
+                onClickHandler={async () => {
+                  setOverlayActive(true);
+                  await takeSelfie();
+                  setOverlayActive(false);
+                }}
                 iconClassName="fas fa-user"
               />
               <CallButton
                 className="m-2"
-                onClickHandler={takeAllParticipantsSelfie}
+                onClickHandler={async () => {
+                  setOverlayActive(true);
+                  await takeAllParticipantsSelfie();
+                  setOverlayActive(false);
+                }}
                 iconClassName="fas fa-users"
               />
             </div>

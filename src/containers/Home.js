@@ -9,6 +9,7 @@ import { GlobalContext } from '../context/globalContext';
 const Home = ({ history }) => {
   const [userRoomName, setUserRoomName] = useState('');
   const [userPassword] = useState('');
+
   const { setRoomName, setRoomPassword } = useContext(GlobalContext);
 
   const onUserRoomNameHandler = ev => setUserRoomName(ev.target.value);

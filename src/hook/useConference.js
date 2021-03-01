@@ -238,7 +238,8 @@ function useConference({
         });
     });
 
-    chainPromises(tasks).then(api.setLargeVideoParticipant());
+    await chainPromises(tasks);
+    api.setLargeVideoParticipant();
   };
 
   useEffect(() => {
