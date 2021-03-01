@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /api
+Host: https://grow-meeting.dastasoft.com/
+Sitemap: https://grow-meeting.dastasoft.com/sitemap.xml
