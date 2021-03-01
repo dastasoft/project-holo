@@ -6,7 +6,7 @@
   "author": "dastasoft",
   "scripts": {
     "start": "yarn run watch:css && env WEBSOCKET=https://grow-meeting-websocket.herokuapp.com parcel --no-cache public/index.html",
-    "build": "yarn run build:css && parcel build public/index.html",
+    "build": "yarn run build:css && parcel build public/*",
     "build:css": "postcss src/styles/tailwind.css -o src/styles/app.css",
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/app.css",
     "lint": "eslint . --fix"
