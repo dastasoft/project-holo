@@ -207,7 +207,6 @@ function useConference({
     return new Promise(resolve => {
       setTimeout(() => {
         api.captureLargeVideoScreenshot().then(data => {
-          console.warn(data.dataURL);
           downloadFile(`${fileName}.png`, data.dataURL);
           api.setLargeVideoParticipant(); // Return to the active participant
           resolve();
@@ -233,12 +232,8 @@ function useConference({
     const tasks = participants.map(participant => {
       return () =>
         new Promise(resolve => {
-          console.warn('setLargeVideoParticipant', participant.displayName);
           api.setLargeVideoParticipant(participant.participantId);
-          captureImage(participant.displayName).then(() => {
-            console.warn('finished', participant.displayName);
-            setTimeout(() => resolve(), 1000);
-          });
+          captureImage(participant.displayName).then(() => resolve());
         });
     });
 
