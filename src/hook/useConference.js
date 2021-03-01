@@ -42,7 +42,7 @@ const interfaceConfig = {
   MAXIMUM_ZOOMING_COEFFICIENT: 1.3,
   MOBILE_APP_PROMO: false,
   NATIVE_APP_NAME: 'Grow Meeting',
-  OPTIMAL_BROWSERS: ['chrome', 'chromium', 'firefox', 'electron'],
+  OPTIMAL_BROWSERS: ['chrome', 'chromium', 'firefox', 'electron', 'safari'],
   POLICY_LOGO: null,
   PROVIDER_NAME: 'Jitsi',
   RECENT_LIST_ENABLED: true,

@@ -64,7 +64,7 @@ const CallRoom = ({ history, setOverlayActive }) => {
   const callButtonsStyle = 'my-2 mx-2';
 
   return (
-    <div className="flex-grow flex flex-col">
+    <div className="flex flex-col flex-1">
       <div className="flex-grow bg-gray-300" id="chatRoom" />
       <div className="flex  flex-wrap justify-center bg-black">
         <MenuButton
