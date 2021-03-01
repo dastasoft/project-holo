@@ -207,7 +207,8 @@ function useConference({
     return new Promise(resolve => {
       setTimeout(() => {
         api.captureLargeVideoScreenshot().then(data => {
-          downloadFile(`${fileName}.png`, data.dataURL);
+          if (data && data.dataURL)
+            downloadFile(`${fileName}.png`, data.dataURL);
           api.setLargeVideoParticipant(); // Return to the active participant
           resolve();
         });
